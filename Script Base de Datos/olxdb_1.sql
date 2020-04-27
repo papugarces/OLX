@@ -1,0 +1,1549 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Generation Time: Apr 21, 2020 at 10:41 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.4.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `olxdb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `administradore`
+--
+
+CREATE TABLE `administradore` (
+  `correo` varchar(255) NOT NULL,
+  `dni` varchar(255) NOT NULL,
+  `numero_cuenta` varchar(255) DEFAULT NULL,
+  `salario` int(11) NOT NULL,
+  `id_cargo` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cargos`
+--
+
+CREATE TABLE `cargos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id_categoria` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categorias`
+--
+
+INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
+(1, 'HOGAR'),
+(2, 'Carro');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `id_chat` int(11) NOT NULL,
+  `correo_cliente` varchar(255) DEFAULT NULL,
+  `dni_cliente` varchar(255) DEFAULT NULL,
+  `correo_ofertador` varchar(255) DEFAULT NULL,
+  `dni_ofertador` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departamentos`
+--
+
+CREATE TABLE `departamentos` (
+  `id` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `departamentos`
+--
+
+INSERT INTO `departamentos` (`id`, `codigo`, `nombre`) VALUES
+(1, 5, 'Antioquia'),
+(2, 8, 'Atlantico'),
+(3, 11, 'D. C. Santa Fe de Bogotá'),
+(4, 13, 'Bolivar'),
+(5, 15, 'Boyaca'),
+(6, 17, 'Caldas'),
+(7, 18, 'Caqueta'),
+(8, 19, 'Cauca'),
+(9, 20, 'Cesar'),
+(10, 23, 'Cordova'),
+(11, 25, 'Cundinamarca'),
+(12, 27, 'Choco'),
+(13, 41, 'Huila'),
+(14, 44, 'La Guajira'),
+(15, 47, 'Magdalena'),
+(16, 50, 'Meta'),
+(17, 52, 'Nariño'),
+(18, 54, 'Norte de Santander'),
+(19, 63, 'Quindio'),
+(20, 66, 'Risaralda'),
+(21, 68, 'Santander'),
+(22, 70, 'Sucre'),
+(23, 73, 'Tolima'),
+(24, 76, 'Valle'),
+(25, 81, 'Arauca'),
+(26, 85, 'Casanare'),
+(27, 86, 'Putumayo'),
+(28, 88, 'San Andres'),
+(29, 91, 'Amazonas'),
+(30, 94, 'Guainia'),
+(31, 95, 'Guaviare'),
+(32, 97, 'Vaupes'),
+(33, 99, 'Vichada');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `imgproducto`
+--
+
+CREATE TABLE `imgproducto` (
+  `id_img_producto` int(11) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `id_producto` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mensajes`
+--
+
+CREATE TABLE `mensajes` (
+  `id_mensaje` int(11) NOT NULL,
+  `fecha_envio` datetime(6) DEFAULT NULL,
+  `texto` longtext,
+  `id_chat` int(11) NOT NULL,
+  `correo_remitente` varchar(255) DEFAULT NULL,
+  `dni_remitente` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `municipios`
+--
+
+CREATE TABLE `municipios` (
+  `id` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `departamento_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `municipios`
+--
+
+INSERT INTO `municipios` (`id`, `codigo`, `nombre`, `departamento_id`) VALUES
+(1, 1, 'MEDELLIN', 1),
+(2, 2, 'ABEJORRAL', 1),
+(3, 4, 'ABRIAQUI', 1),
+(4, 21, 'ALEJANDRIA', 1),
+(5, 30, 'AMAGA', 1),
+(6, 31, 'AMALFI', 1),
+(7, 34, 'ANDES', 1),
+(8, 36, 'ANGELOPOLIS', 1),
+(9, 38, 'ANGOSTURA', 1),
+(10, 40, 'ANORI', 1),
+(11, 42, 'ANTIOQUIA', 1),
+(12, 44, 'ANZA', 1),
+(13, 45, 'APARTADO', 1),
+(14, 51, 'ARBOLETES', 1),
+(15, 55, 'ARGELIA', 1),
+(16, 59, 'ARMENIA', 1),
+(17, 79, 'BARBOSA', 1),
+(18, 86, 'BELMIRA', 1),
+(19, 88, 'BELLO', 1),
+(20, 91, 'BETANIA', 1),
+(21, 93, 'BETULIA', 1),
+(22, 101, 'BOLIVAR', 1),
+(23, 107, 'BRICEÑO', 1),
+(24, 113, 'BURITICA', 1),
+(25, 120, 'CACERES', 1),
+(26, 125, 'CAICEDO', 1),
+(27, 129, 'CALDAS', 1),
+(28, 134, 'CAMPAMENTO', 1),
+(29, 138, 'CAÑASGORDAS', 1),
+(30, 142, 'CARACOLI', 1),
+(31, 145, 'CARAMANTA', 1),
+(32, 147, 'CAREPA', 1),
+(33, 148, 'CARMEN DE VIBORAL', 1),
+(34, 150, 'CAROLINA', 1),
+(35, 154, 'CAUCASIA', 1),
+(36, 172, 'CHIGORODO', 1),
+(37, 190, 'CISNEROS', 1),
+(38, 197, 'COCORNA', 1),
+(39, 206, 'CONCEPCION', 1),
+(40, 209, 'CONCORDIA', 1),
+(41, 212, 'COPACABANA', 1),
+(42, 234, 'DABEIBA', 1),
+(43, 237, 'DON MATIAS', 1),
+(44, 240, 'EBEJICO', 1),
+(45, 250, 'EL BAGRE', 1),
+(46, 264, 'ENTRERRIOS', 1),
+(47, 266, 'ENVIGADO', 1),
+(48, 282, 'FREDONIA', 1),
+(49, 284, 'FRONTINO', 1),
+(50, 306, 'GIRALDO', 1),
+(51, 308, 'GIRARDOTA', 1),
+(52, 310, 'GOMEZ PLATA', 1),
+(53, 313, 'GRANADA', 1),
+(54, 315, 'GUADALUPE', 1),
+(55, 318, 'GUARNE', 1),
+(56, 321, 'GUATAPE', 1),
+(57, 347, 'HELICONIA', 1),
+(58, 353, 'HISPANIA', 1),
+(59, 360, 'ITAGUI', 1),
+(60, 361, 'ITUANGO', 1),
+(61, 364, 'JARDIN', 1),
+(62, 368, 'JERICO', 1),
+(63, 376, 'LA CEJA', 1),
+(64, 380, 'LA ESTRELLA', 1),
+(65, 390, 'LA PINTADA', 1),
+(66, 400, 'LA UNION', 1),
+(67, 411, 'LIBORINA', 1),
+(68, 425, 'MACEO', 1),
+(69, 440, 'MARINILLA', 1),
+(70, 467, 'MONTEBELLO', 1),
+(71, 475, 'MURINDO', 1),
+(72, 480, 'MUTATA', 1),
+(73, 483, 'NARIÑO', 1),
+(74, 490, 'NECOCLI', 1),
+(75, 495, 'NECHI', 1),
+(76, 501, 'OLAYA', 1),
+(77, 541, 'PEÑOL', 1),
+(78, 543, 'PEQUE', 1),
+(79, 576, 'PUEBLORRICO', 1),
+(80, 579, 'PUERTO BERRIO', 1),
+(81, 585, 'PUERTO NARE (LA MAGDALENA)', 1),
+(82, 591, 'PUERTO TRIUNFO', 1),
+(83, 604, 'REMEDIOS', 1),
+(84, 607, 'RETIRO', 1),
+(85, 615, 'RIONEGRO', 1),
+(86, 628, 'SABANALARGA', 1),
+(87, 631, 'SABANETA', 1),
+(88, 642, 'SALGAR', 1),
+(89, 647, 'SAN ANDRES', 1),
+(90, 649, 'SAN CARLOS', 1),
+(91, 652, 'SAN FRANCISCO', 1),
+(92, 656, 'SAN JERONIMO', 1),
+(93, 658, 'SAN JOSE DE LA MONTAÑA', 1),
+(94, 659, 'SAN JUAN DE URABA', 1),
+(95, 660, 'SAN LUIS', 1),
+(96, 664, 'SAN PEDRO', 1),
+(97, 665, 'SAN PEDRO DE URABA', 1),
+(98, 667, 'SAN RAFAEL', 1),
+(99, 670, 'SAN ROQUE', 1),
+(100, 674, 'SAN VICENTE', 1),
+(101, 679, 'SANTA BARBARA', 1),
+(102, 686, 'SANTA ROSA DE OSOS', 1),
+(103, 690, 'SANTO DOMINGO', 1),
+(104, 697, 'SANTUARIO', 1),
+(105, 736, 'SEGOVIA', 1),
+(106, 756, 'SONSON', 1),
+(107, 761, 'SOPETRAN', 1),
+(108, 789, 'TAMESIS', 1),
+(109, 790, 'TARAZA', 1),
+(110, 792, 'TARSO', 1),
+(111, 809, 'TITIRIBI', 1),
+(112, 819, 'TOLEDO', 1),
+(113, 837, 'TURBO', 1),
+(114, 842, 'URAMITA', 1),
+(115, 847, 'URRAO', 1),
+(116, 854, 'VALDIVIA', 1),
+(117, 856, 'VALPARAISO', 1),
+(118, 858, 'VEGACHI', 1),
+(119, 861, 'VENECIA', 1),
+(120, 873, 'VIGIA DEL FUERTE', 1),
+(121, 885, 'YALI', 1),
+(122, 887, 'YARUMAL', 1),
+(123, 890, 'YOLOMBO', 1),
+(124, 893, 'YONDO', 1),
+(125, 895, 'ZARAGOZA', 1),
+(126, 1, 'BARRANQUILLA (DISTRITO ESPECIAL INDUSTRIAL Y PORTUARIO DE BARRANQUILLA)', 2),
+(127, 78, 'BARANOA', 2),
+(128, 137, 'CAMPO DE LA CRUZ', 2),
+(129, 141, 'CANDELARIA', 2),
+(130, 296, 'GALAPA', 2),
+(131, 372, 'JUAN DE ACOSTA', 2),
+(132, 421, 'LURUACO', 2),
+(133, 433, 'MALAMBO', 2),
+(134, 436, 'MANATI', 2),
+(135, 520, 'PALMAR DE VARELA', 2),
+(136, 549, 'PIOJO', 2),
+(137, 558, 'POLO NUEVO', 2),
+(138, 560, 'PONEDERA', 2),
+(139, 573, 'PUERTO COLOMBIA', 2),
+(140, 606, 'REPELON', 2),
+(141, 634, 'SABANAGRANDE', 2),
+(142, 638, 'SABANALARGA', 2),
+(143, 675, 'SANTA LUCIA', 2),
+(144, 685, 'SANTO TOMAS', 2),
+(145, 758, 'SOLEDAD', 2),
+(146, 770, 'SUAN', 2),
+(147, 832, 'TUBARA', 2),
+(148, 849, 'USIACURI', 2),
+(149, 1, 'Santa Fe de Bogotá', 3),
+(150, 1, 'USAQUEN', 3),
+(151, 2, 'CHAPINERO', 3),
+(152, 3, 'SANTA FE', 3),
+(153, 4, 'SAN CRISTOBAL', 3),
+(154, 5, 'USME', 3),
+(155, 6, 'TUNJUELITO', 3),
+(156, 7, 'BOSA', 3),
+(157, 8, 'KENNEDY', 3),
+(158, 9, 'FONTIBON', 3),
+(159, 10, 'ENGATIVA', 3),
+(160, 11, 'SUBA', 3),
+(161, 12, 'BARRIOS UNIDOS', 3),
+(162, 13, 'TEUSAQUILLO', 3),
+(163, 14, 'MARTIRES', 3),
+(164, 15, 'ANTONIO NARIÑO', 3),
+(165, 16, 'PUENTE ARANDA', 3),
+(166, 17, 'CANDELARIA', 3),
+(167, 18, 'RAFAEL URIBE', 3),
+(168, 19, 'CIUDAD BOLIVAR', 3),
+(169, 20, 'SUMAPAZ', 3),
+(170, 1, 'CARTAGENA (DISTRITO TURISTICO Y CULTURAL DE CARTAGENA)', 4),
+(171, 6, 'ACHI', 4),
+(172, 30, 'ALTOS DEL ROSARIO', 4),
+(173, 42, 'ARENAL', 4),
+(174, 52, 'ARJONA', 4),
+(175, 62, 'ARROYOHONDO', 4),
+(176, 74, 'BARRANCO DE LOBA', 4),
+(177, 140, 'CALAMAR', 4),
+(178, 160, 'CANTAGALLO', 4),
+(179, 188, 'CICUCO', 4),
+(180, 212, 'CORDOBA', 4),
+(181, 222, 'CLEMENCIA', 4),
+(182, 244, 'EL CARMEN DE BOLIVAR', 4),
+(183, 248, 'EL GUAMO', 4),
+(184, 268, 'EL PEÑON', 4),
+(185, 300, 'HATILLO DE LOBA', 4),
+(186, 430, 'MAGANGUE', 4),
+(187, 433, 'MAHATES', 4),
+(188, 440, 'MARGARITA', 4),
+(189, 442, 'MARIA LA BAJA', 4),
+(190, 458, 'MONTECRISTO', 4),
+(191, 468, 'MOMPOS', 4),
+(192, 473, 'MORALES', 4),
+(193, 549, 'PINILLOS', 4),
+(194, 580, 'REGIDOR', 4),
+(195, 600, 'RIO VIEJO', 4),
+(196, 620, 'SAN CRISTOBAL', 4),
+(197, 647, 'SAN ESTANISLAO', 4),
+(198, 650, 'SAN FERNANDO', 4),
+(199, 654, 'SAN JACINTO', 4),
+(200, 655, 'SAN JACINTO DEL CAUCA', 4),
+(201, 657, 'SAN JUAN NEPOMUCENO', 4),
+(202, 667, 'SAN MARTIN DE LOBA', 4),
+(203, 670, 'SAN PABLO', 4),
+(204, 673, 'SANTA CATALINA', 4),
+(205, 683, 'SANTA ROSA', 4),
+(206, 688, 'SANTA ROSA DEL SUR', 4),
+(207, 744, 'SIMITI', 4),
+(208, 760, 'SOPLAVIENTO', 4),
+(209, 780, 'TALAIGUA NUEVO', 4),
+(210, 810, 'TIQUISIO (PUERTO RICO)', 4),
+(211, 836, 'TURBACO', 4),
+(212, 838, 'TURBANA', 4),
+(213, 873, 'VILLANUEVA', 4),
+(214, 894, 'ZAMBRANO', 4),
+(215, 1, 'TUNJA', 5),
+(216, 22, 'ALMEIDA', 5),
+(217, 47, 'AQUITANIA', 5),
+(218, 51, 'ARCABUCO', 5),
+(219, 87, 'BELEN', 5),
+(220, 90, 'BERBEO', 5),
+(221, 92, 'BETEITIVA', 5),
+(222, 97, 'BOAVITA', 5),
+(223, 104, 'BOYACA', 5),
+(224, 106, 'BRICEÑO', 5),
+(225, 109, 'BUENAVISTA', 5),
+(226, 114, 'BUSBANZA', 5),
+(227, 131, 'CALDAS', 5),
+(228, 135, 'CAMPOHERMOSO', 5),
+(229, 162, 'CERINZA', 5),
+(230, 172, 'CHINAVITA', 5),
+(231, 176, 'CHIQUINQUIRA', 5),
+(232, 180, 'CHISCAS', 5),
+(233, 183, 'CHITA', 5),
+(234, 185, 'CHITARAQUE', 5),
+(235, 187, 'CHIVATA', 5),
+(236, 189, 'CIENEGA', 5),
+(237, 204, 'COMBITA', 5),
+(238, 212, 'COPER', 5),
+(239, 215, 'CORRALES', 5),
+(240, 218, 'COVARACHIA', 5),
+(241, 223, 'CUBARA', 5),
+(242, 224, 'CUCAITA', 5),
+(243, 226, 'CUITIVA', 5),
+(244, 232, 'CHIQUIZA', 5),
+(245, 236, 'CHIVOR', 5),
+(246, 238, 'DUITAMA', 5),
+(247, 244, 'EL COCUY', 5),
+(248, 248, 'EL ESPINO', 5),
+(249, 272, 'FIRAVITOBA', 5),
+(250, 276, 'FLORESTA', 5),
+(251, 293, 'GACHANTIVA', 5),
+(252, 296, 'GAMEZA', 5),
+(253, 299, 'GARAGOA', 5),
+(254, 317, 'GUACAMAYAS', 5),
+(255, 322, 'GUATEQUE', 5),
+(256, 325, 'GUAYATA', 5),
+(257, 332, 'GUICAN', 5),
+(258, 362, 'IZA', 5),
+(259, 367, 'JENESANO', 5),
+(260, 368, 'JERICO', 5),
+(261, 377, 'LABRANZAGRANDE', 5),
+(262, 380, 'LA CAPILLA', 5),
+(263, 401, 'LA VICTORIA', 5),
+(264, 403, 'LA UVITA', 5),
+(265, 407, 'VILLA DE LEIVA', 5),
+(266, 425, 'MACANAL', 5),
+(267, 442, 'MARIPI', 5),
+(268, 455, 'MIRAFLORES', 5),
+(269, 464, 'MONGUA', 5),
+(270, 466, 'MONGUI', 5),
+(271, 469, 'MONIQUIRA', 5),
+(272, 476, 'MOTAVITA', 5),
+(273, 480, 'MUZO', 5),
+(274, 491, 'NOBSA', 5),
+(275, 494, 'NUEVO COLON', 5),
+(276, 500, 'OICATA', 5),
+(277, 507, 'OTANCHE', 5),
+(278, 511, 'PACHAVITA', 5),
+(279, 514, 'PAEZ', 5),
+(280, 516, 'PAIPA', 5),
+(281, 518, 'PAJARITO', 5),
+(282, 522, 'PANQUEBA', 5),
+(283, 531, 'PAUNA', 5),
+(284, 533, 'PAYA', 5),
+(285, 537, 'PAZ DEL RIO', 5),
+(286, 542, 'PESCA', 5),
+(287, 550, 'PISBA', 5),
+(288, 572, 'PUERTO BOYACA', 5),
+(289, 580, 'QUIPAMA', 5),
+(290, 599, 'RAMIRIQUI', 5),
+(291, 600, 'RAQUIRA', 5),
+(292, 621, 'RONDON', 5),
+(293, 632, 'SABOYA', 5),
+(294, 638, 'SACHICA', 5),
+(295, 646, 'SAMACA', 5),
+(296, 660, 'SAN EDUARDO', 5),
+(297, 664, 'SAN JOSE DE PARE', 5),
+(298, 667, 'SAN LUIS DE GACENO', 5),
+(299, 673, 'SAN MATEO', 5),
+(300, 676, 'SAN MIGUEL DE SEMA', 5),
+(301, 681, 'SAN PABLO DE BORBUR', 5),
+(302, 686, 'SANTANA', 5),
+(303, 690, 'SANTA MARIA', 5),
+(304, 693, 'SANTA ROSA DE VITERBO', 5),
+(305, 696, 'SANTA SOFIA', 5),
+(306, 720, 'SATIVANORTE', 5),
+(307, 723, 'SATIVASUR', 5),
+(308, 740, 'SIACHOQUE', 5),
+(309, 753, 'SOATA', 5),
+(310, 755, 'SOCOTA', 5),
+(311, 757, 'SOCHA', 5),
+(312, 759, 'SOGAMOSO', 5),
+(313, 761, 'SOMONDOCO', 5),
+(314, 762, 'SORA', 5),
+(315, 763, 'SOTAQUIRA', 5),
+(316, 764, 'SORACA', 5),
+(317, 774, 'SUSACON', 5),
+(318, 776, 'SUTAMARCHAN', 5),
+(319, 778, 'SUTATENZA', 5),
+(320, 790, 'TASCO', 5),
+(321, 798, 'TENZA', 5),
+(322, 804, 'TIBANA', 5),
+(323, 806, 'TIBASOSA', 5),
+(324, 808, 'TINJACA', 5),
+(325, 810, 'TIPACOQUE', 5),
+(326, 814, 'TOCA', 5),
+(327, 816, 'TOGUI', 5),
+(328, 820, 'TOPAGA', 5),
+(329, 822, 'TOTA', 5),
+(330, 832, 'TUNUNGUA', 5),
+(331, 835, 'TURMEQUE', 5),
+(332, 837, 'TUTA', 5),
+(333, 839, 'TUTASA', 5),
+(334, 842, 'UMBITA', 5),
+(335, 861, 'VENTAQUEMADA', 5),
+(336, 879, 'VIRACACHA', 5),
+(337, 897, 'ZETAQUIRA', 5),
+(338, 1, 'MANIZALES', 6),
+(339, 13, 'AGUADAS', 6),
+(340, 42, 'ANSERMA', 6),
+(341, 50, 'ARANZAZU', 6),
+(342, 88, 'BELALCAZAR', 6),
+(343, 174, 'CHINCHINA', 6),
+(344, 272, 'FILADELFIA', 6),
+(345, 380, 'LA DORADA', 6),
+(346, 388, 'LA MERCED', 6),
+(347, 433, 'MANZANARES', 6),
+(348, 442, 'MARMATO', 6),
+(349, 444, 'MARQUETALIA', 6),
+(350, 446, 'MARULANDA', 6),
+(351, 486, 'NEIRA', 6),
+(352, 495, 'NORCASIA', 6),
+(353, 513, 'PACORA', 6),
+(354, 524, 'PALESTINA', 6),
+(355, 541, 'PENSILVANIA', 6),
+(356, 614, 'RIOSUCIO', 6),
+(357, 616, 'RISARALDA', 6),
+(358, 653, 'SALAMINA', 6),
+(359, 662, 'SAMANA', 6),
+(360, 665, 'SAN JOSE', 6),
+(361, 777, 'SUPIA', 6),
+(362, 867, 'VICTORIA', 6),
+(363, 873, 'VILLAMARIA', 6),
+(364, 877, 'VITERBO', 6),
+(365, 1, 'FLORENCIA', 7),
+(366, 29, 'ALBANIA', 7),
+(367, 94, 'BELEN DE LOS ANDAQUIES', 7),
+(368, 150, 'CARTAGENA DEL CHAIRA', 7),
+(369, 205, 'CURILLO', 7),
+(370, 247, 'EL DONCELLO', 7),
+(371, 256, 'EL PAUJIL', 7),
+(372, 410, 'LA MONTAÑITA', 7),
+(373, 460, 'MILAN', 7),
+(374, 479, 'MORELIA', 7),
+(375, 592, 'PUERTO RICO', 7),
+(376, 610, 'SAN JOSE DE FRAGUA', 7),
+(377, 753, 'SAN VICENTE DEL CAGUAN', 7),
+(378, 756, 'SOLANO', 7),
+(379, 785, 'SOLITA', 7),
+(380, 860, 'VALPARAISO', 7),
+(381, 1, 'POPAYAN', 8),
+(382, 22, 'ALMAGUER', 8),
+(383, 50, 'ARGELIA', 8),
+(384, 75, 'BALBOA', 8),
+(385, 100, 'BOLIVAR', 8),
+(386, 110, 'BUENOS AIRES', 8),
+(387, 130, 'CAJIBIO', 8),
+(388, 137, 'CALDONO', 8),
+(389, 142, 'CALOTO', 8),
+(390, 212, 'CORINTO', 8),
+(391, 256, 'EL TAMBO', 8),
+(392, 290, 'FLORENCIA', 8),
+(393, 318, 'GUAPI', 8),
+(394, 355, 'INZA', 8),
+(395, 364, 'JAMBALO', 8),
+(396, 392, 'LA SIERRA', 8),
+(397, 397, 'LA VEGA', 8),
+(398, 418, 'LOPEZ (MICAY)', 8),
+(399, 450, 'MERCADERES', 8),
+(400, 455, 'MIRANDA', 8),
+(401, 473, 'MORALES', 8),
+(402, 513, 'PADILLA', 8),
+(403, 517, 'PAEZ (BELALCAZAR)', 8),
+(404, 532, 'PATIA (EL BORDO)', 8),
+(405, 533, 'PIAMONTE', 8),
+(406, 548, 'PIENDAMO', 8),
+(407, 573, 'PUERTO TEJADA', 8),
+(408, 585, 'PURACE (COCONUCO)', 8),
+(409, 622, 'ROSAS', 8),
+(410, 693, 'SAN SEBASTIAN', 8),
+(411, 698, 'SANTANDER DE QUILICHAO', 8),
+(412, 701, 'SANTA ROSA', 8),
+(413, 743, 'SILVIA', 8),
+(414, 760, 'SOTARA (PAISPAMBA)', 8),
+(415, 780, 'SUAREZ', 8),
+(416, 807, 'TIMBIO', 8),
+(417, 809, 'TIMBIQUI', 8),
+(418, 821, 'TORIBIO', 8),
+(419, 824, 'TOTORO', 8),
+(420, 845, 'VILLARICA', 8),
+(421, 1, 'VALLEDUPAR', 9),
+(422, 11, 'AGUACHICA', 9),
+(423, 13, 'AGUSTIN CODAZZI', 9),
+(424, 32, 'ASTREA', 9),
+(425, 45, 'BECERRIL', 9),
+(426, 60, 'BOSCONIA', 9),
+(427, 175, 'CHIMICHAGUA', 9),
+(428, 178, 'CHIRIGUANA', 9),
+(429, 228, 'CURUMANI', 9),
+(430, 238, 'EL COPEY', 9),
+(431, 250, 'EL PASO', 9),
+(432, 295, 'GAMARRA', 9),
+(433, 310, 'GONZALEZ', 9),
+(434, 383, 'LA GLORIA', 9),
+(435, 400, 'LA JAGUA IBIRICO', 9),
+(436, 443, 'MANAURE (BALCON DEL CESAR)', 9),
+(437, 517, 'PAILITAS', 9),
+(438, 550, 'PELAYA', 9),
+(439, 570, 'PUEBLO BELLO', 9),
+(440, 614, 'RIO DE ORO', 9),
+(441, 621, 'LA PAZ (ROBLES)', 9),
+(442, 710, 'SAN ALBERTO', 9),
+(443, 750, 'SAN DIEGO', 9),
+(444, 770, 'SAN MARTIN', 9),
+(445, 787, 'TAMALAMEQUE', 9),
+(446, 1, 'MONTERIA', 10),
+(447, 68, 'AYAPEL', 10),
+(448, 79, 'BUENAVISTA', 10),
+(449, 90, 'CANALETE', 10),
+(450, 162, 'CERETE', 10),
+(451, 168, 'CHIMA', 10),
+(452, 182, 'CHINU', 10),
+(453, 189, 'CIENAGA DE ORO', 10),
+(454, 300, 'COTORRA', 10),
+(455, 350, 'LA APARTADA', 10),
+(456, 417, 'LORICA', 10),
+(457, 419, 'LOS CORDOBAS', 10),
+(458, 464, 'MOMIL', 10),
+(459, 466, 'MONTELIBANO', 10),
+(460, 500, 'MOÑITOS', 10),
+(461, 555, 'PLANETA RICA', 10),
+(462, 570, 'PUEBLO NUEVO', 10),
+(463, 574, 'PUERTO ESCONDIDO', 10),
+(464, 580, 'PUERTO LIBERTADOR', 10),
+(465, 586, 'PURISIMA', 10),
+(466, 660, 'SAHAGUN', 10),
+(467, 670, 'SAN ANDRES SOTAVENTO', 10),
+(468, 672, 'SAN ANTERO', 10),
+(469, 675, 'SAN BERNARDO DEL VIENTO', 10),
+(470, 678, 'SAN CARLOS', 10),
+(471, 686, 'SAN PELAYO', 10),
+(472, 807, 'TIERRALTA', 10),
+(473, 855, 'VALENCIA', 10),
+(474, 1, 'AGUA DE DIOS', 11),
+(475, 19, 'ALBAN', 11),
+(476, 35, 'ANAPOIMA', 11),
+(477, 40, 'ANOLAIMA', 11),
+(478, 53, 'ARBELAEZ', 11),
+(479, 86, 'BELTRAN', 11),
+(480, 95, 'BITUIMA', 11),
+(481, 99, 'BOJACA', 11),
+(482, 120, 'CABRERA', 11),
+(483, 123, 'CACHIPAY', 11),
+(484, 126, 'CAJICA', 11),
+(485, 148, 'CAPARRAPI', 11),
+(486, 151, 'CAQUEZA', 11),
+(487, 154, 'CARMEN DE CARUPA', 11),
+(488, 168, 'CHAGUANI', 11),
+(489, 175, 'CHIA', 11),
+(490, 178, 'CHIPAQUE', 11),
+(491, 181, 'CHOACHI', 11),
+(492, 183, 'CHOCONTA', 11),
+(493, 200, 'COGUA', 11),
+(494, 214, 'COTA', 11),
+(495, 224, 'CUCUNUBA', 11),
+(496, 245, 'EL COLEGIO', 11),
+(497, 258, 'EL PEÑON', 11),
+(498, 260, 'EL ROSAL', 11),
+(499, 269, 'FACATATIVA', 11),
+(500, 279, 'FOMEQUE', 11),
+(501, 281, 'FOSCA', 11),
+(502, 286, 'FUNZA', 11),
+(503, 288, 'FUQUENE', 11),
+(504, 290, 'FUSAGASUGA', 11),
+(505, 293, 'GACHALA', 11),
+(506, 295, 'GACHANCIPA', 11),
+(507, 297, 'GACHETA', 11),
+(508, 299, 'GAMA', 11),
+(509, 307, 'GIRARDOT', 11),
+(510, 312, 'GRANADA', 11),
+(511, 317, 'GUACHETA', 11),
+(512, 320, 'GUADUAS', 11),
+(513, 322, 'GUASCA', 11),
+(514, 324, 'GUATAQUI', 11),
+(515, 326, 'GUATAVITA', 11),
+(516, 328, 'GUAYABAL DE SIQUIMA', 11),
+(517, 335, 'GUAYABETAL', 11),
+(518, 339, 'GUTIERREZ', 11),
+(519, 368, 'JERUSALEN', 11),
+(520, 372, 'JUNIN', 11),
+(521, 377, 'LA CALERA', 11),
+(522, 386, 'LA MESA', 11),
+(523, 394, 'LA PALMA', 11),
+(524, 398, 'LA PEÑA', 11),
+(525, 402, 'LA VEGA', 11),
+(526, 407, 'LENGUAZAQUE', 11),
+(527, 426, 'MACHETA', 11),
+(528, 430, 'MADRID', 11),
+(529, 436, 'MANTA', 11),
+(530, 438, 'MEDINA', 11),
+(531, 473, 'MOSQUERA', 11),
+(532, 483, 'NARIÑO', 11),
+(533, 486, 'NEMOCON', 11),
+(534, 488, 'NILO', 11),
+(535, 489, 'NIMAIMA', 11),
+(536, 491, 'NOCAIMA', 11),
+(537, 506, 'VENECIA (OSPINA PEREZ)', 11),
+(538, 513, 'PACHO', 11),
+(539, 518, 'PAIME', 11),
+(540, 524, 'PANDI', 11),
+(541, 530, 'PARATEBUENO', 11),
+(542, 535, 'PASCA', 11),
+(543, 572, 'PUERTO SALGAR', 11),
+(544, 580, 'PULI', 11),
+(545, 592, 'QUEBRADANEGRA', 11),
+(546, 594, 'QUETAME', 11),
+(547, 596, 'QUIPILE', 11),
+(548, 599, 'APULO (RAFAEL REYES)', 11),
+(549, 612, 'RICAURTE', 11),
+(550, 645, 'SAN ANTONIO DEL TEQUENDAMA', 11),
+(551, 649, 'SAN BERNARDO', 11),
+(552, 653, 'SAN CAYETANO', 11),
+(553, 658, 'SAN FRANCISCO', 11),
+(554, 662, 'SAN JUAN DE RIOSECO', 11),
+(555, 718, 'SASAIMA', 11),
+(556, 736, 'SESQUILE', 11),
+(557, 740, 'SIBATE', 11),
+(558, 743, 'SILVANIA', 11),
+(559, 745, 'SIMIJACA', 11),
+(560, 754, 'SOACHA', 11),
+(561, 758, 'SOPO', 11),
+(562, 769, 'SUBACHOQUE', 11),
+(563, 772, 'SUESCA', 11),
+(564, 777, 'SUPATA', 11),
+(565, 779, 'SUSA', 11),
+(566, 781, 'SUTATAUSA', 11),
+(567, 785, 'TABIO', 11),
+(568, 793, 'TAUSA', 11),
+(569, 797, 'TENA', 11),
+(570, 799, 'TENJO', 11),
+(571, 805, 'TIBACUY', 11),
+(572, 807, 'TIBIRITA', 11),
+(573, 815, 'TOCAIMA', 11),
+(574, 817, 'TOCANCIPA', 11),
+(575, 823, 'TOPAIPI', 11),
+(576, 839, 'UBALA', 11),
+(577, 841, 'UBAQUE', 11),
+(578, 843, 'UBATE', 11),
+(579, 845, 'UNE', 11),
+(580, 851, 'UTICA', 11),
+(581, 862, 'VERGARA', 11),
+(582, 867, 'VIANI', 11),
+(583, 871, 'VILLAGOMEZ', 11),
+(584, 873, 'VILLAPINZON', 11),
+(585, 875, 'VILLETA', 11),
+(586, 878, 'VIOTA', 11),
+(587, 885, 'YACOPI', 11),
+(588, 898, 'ZIPACON', 11),
+(589, 899, 'ZIPAQUIRA', 11),
+(590, 1, 'QUIBDO (SAN FRANCISCO DE QUIBDO)', 12),
+(591, 6, 'ACANDI', 12),
+(592, 25, 'ALTO BAUDO (PIE DE PATO)', 12),
+(593, 50, 'ATRATO', 12),
+(594, 73, 'BAGADO', 12),
+(595, 75, 'BAHIA SOLANO (MUTIS)', 12),
+(596, 77, 'BAJO BAUDO (PIZARRO)', 12),
+(597, 99, 'BOJAYA (BELLAVISTA)', 12),
+(598, 135, 'CANTON DE SAN PABLO (MANAGRU)', 12),
+(599, 205, 'CONDOTO', 12),
+(600, 245, 'EL CARMEN DE ATRATO', 12),
+(601, 250, 'LITORAL DEL BAJO SAN JUAN (SANTA GENOVEVA DE DOCORDO)', 12),
+(602, 361, 'ISTMINA', 12),
+(603, 372, 'JURADO', 12),
+(604, 413, 'LLORO', 12),
+(605, 425, 'MEDIO ATRATO', 12),
+(606, 430, 'MEDIO BAUDO', 12),
+(607, 491, 'NOVITA', 12),
+(608, 495, 'NUQUI', 12),
+(609, 600, 'RIOQUITO', 12),
+(610, 615, 'RIOSUCIO', 12),
+(611, 660, 'SAN JOSE DEL PALMAR', 12),
+(612, 745, 'SIPI', 12),
+(613, 787, 'TADO', 12),
+(614, 800, 'UNGUIA', 12),
+(615, 810, 'UNION PANAMERICANA', 12),
+(616, 1, 'NEIVA', 13),
+(617, 6, 'ACEVEDO', 13),
+(618, 13, 'AGRADO', 13),
+(619, 16, 'AIPE', 13),
+(620, 20, 'ALGECIRAS', 13),
+(621, 26, 'ALTAMIRA', 13),
+(622, 78, 'BARAYA', 13),
+(623, 132, 'CAMPOALEGRE', 13),
+(624, 206, 'COLOMBIA', 13),
+(625, 244, 'ELIAS', 13),
+(626, 298, 'GARZON', 13),
+(627, 306, 'GIGANTE', 13),
+(628, 319, 'GUADALUPE', 13),
+(629, 349, 'HOBO', 13),
+(630, 357, 'IQUIRA', 13),
+(631, 359, 'ISNOS (SAN JOSE DE ISNOS)', 13),
+(632, 378, 'LA ARGENTINA', 13),
+(633, 396, 'LA PLATA', 13),
+(634, 483, 'NATAGA', 13),
+(635, 503, 'OPORAPA', 13),
+(636, 518, 'PAICOL', 13),
+(637, 524, 'PALERMO', 13),
+(638, 530, 'PALESTINA', 13),
+(639, 548, 'PITAL', 13),
+(640, 551, 'PITALITO', 13),
+(641, 615, 'RIVERA', 13),
+(642, 660, 'SALADOBLANCO', 13),
+(643, 668, 'SAN AGUSTIN', 13),
+(644, 676, 'SANTA MARIA', 13),
+(645, 770, 'SUAZA', 13),
+(646, 791, 'TARQUI', 13),
+(647, 797, 'TESALIA', 13),
+(648, 799, 'TELLO', 13),
+(649, 801, 'TERUEL', 13),
+(650, 807, 'TIMANA', 13),
+(651, 872, 'VILLAVIEJA', 13),
+(652, 885, 'YAGUARA', 13),
+(653, 1, 'RIOHACHA', 14),
+(654, 78, 'BARRANCAS', 14),
+(655, 90, 'DIBULLA', 14),
+(656, 98, 'DISTRACCION', 14),
+(657, 110, 'EL MOLINO', 14),
+(658, 279, 'FONSECA', 14),
+(659, 378, 'HATONUEVO', 14),
+(660, 420, 'LA JAGUA DEL PILAR', 14),
+(661, 430, 'MAICAO', 14),
+(662, 560, 'MANAURE', 14),
+(663, 650, 'SAN JUAN DEL CESAR', 14),
+(664, 847, 'URIBIA', 14),
+(665, 855, 'URUMITA', 14),
+(666, 874, 'VILLANUEVA', 14),
+(667, 1, 'SANTA MARTA (DISTRITO TURISTICO CULTURAL E HISTORICO DE SANTA MARTA)', 15),
+(668, 30, 'ALGARROBO', 15),
+(669, 53, 'ARACATACA', 15),
+(670, 58, 'ARIGUANI (EL DIFICIL)', 15),
+(671, 161, 'CERRO SAN ANTONIO', 15),
+(672, 170, 'CHIVOLO', 15),
+(673, 189, 'CIENAGA', 15),
+(674, 205, 'CONCORDIA', 15),
+(675, 245, 'EL BANCO', 15),
+(676, 258, 'EL PIÑON', 15),
+(677, 268, 'EL RETEN', 15),
+(678, 288, 'FUNDACION', 15),
+(679, 318, 'GUAMAL', 15),
+(680, 541, 'PEDRAZA', 15),
+(681, 545, 'PIJIÑO DEL CARMEN (PIJIÑO)', 15),
+(682, 551, 'PIVIJAY', 15),
+(683, 555, 'PLATO', 15),
+(684, 570, 'PUEBLOVIEJO', 15),
+(685, 605, 'REMOLINO', 15),
+(686, 660, 'SABANAS DE SAN ANGEL', 15),
+(687, 675, 'SALAMINA', 15),
+(688, 692, 'SAN SEBASTIAN DE BUENAVISTA', 15),
+(689, 703, 'SAN ZENON', 15),
+(690, 707, 'SANTA ANA', 15),
+(691, 745, 'SITIONUEVO', 15),
+(692, 798, 'TENERIFE', 15),
+(693, 1, 'VILLAVICENCIO', 16),
+(694, 6, 'ACACIAS', 16),
+(695, 110, 'BARRANCA DE UPIA', 16),
+(696, 124, 'CABUYARO', 16),
+(697, 150, 'CASTILLA LA NUEVA', 16),
+(698, 223, 'SAN LUIS DE CUBARRAL', 16),
+(699, 226, 'CUMARAL', 16),
+(700, 245, 'EL CALVARIO', 16),
+(701, 251, 'EL CASTILLO', 16),
+(702, 270, 'EL DORADO', 16),
+(703, 287, 'FUENTE DE ORO', 16),
+(704, 313, 'GRANADA', 16),
+(705, 318, 'GUAMAL', 16),
+(706, 325, 'MAPIRIPAN', 16),
+(707, 330, 'MESETAS', 16),
+(708, 350, 'LA MACARENA', 16),
+(709, 370, 'LA URIBE', 16),
+(710, 400, 'LEJANIAS', 16),
+(711, 450, 'PUERTO CONCORDIA', 16),
+(712, 568, 'PUERTO GAITAN', 16),
+(713, 573, 'PUERTO LOPEZ', 16),
+(714, 577, 'PUERTO LLERAS', 16),
+(715, 590, 'PUERTO RICO', 16),
+(716, 606, 'RESTREPO', 16),
+(717, 680, 'SAN CARLOS DE GUAROA', 16),
+(718, 683, 'SAN JUAN DE ARAMA', 16),
+(719, 686, 'SAN JUANITO', 16),
+(720, 689, 'SAN MARTIN', 16),
+(721, 711, 'VISTAHERMOSA', 16),
+(722, 1, 'PASTO (SAN JUAN DE PASTO)', 17),
+(723, 19, 'ALBAN (SAN JOSE)', 17),
+(724, 22, 'ALDANA', 17),
+(725, 36, 'ANCUYA', 17),
+(726, 51, 'ARBOLEDA (BERRUECOS)', 17),
+(727, 79, 'BARBACOAS', 17),
+(728, 83, 'BELEN', 17),
+(729, 110, 'BUESACO', 17),
+(730, 203, 'COLON (GENOVA)', 17),
+(731, 207, 'CONSACA', 17),
+(732, 210, 'CONTADERO', 17),
+(733, 215, 'CORDOBA', 17),
+(734, 224, 'CUASPUD (CARLOSAMA)', 17),
+(735, 227, 'CUMBAL', 17),
+(736, 233, 'CUMBITARA', 17),
+(737, 240, 'CHACHAGUI', 17),
+(738, 250, 'EL CHARCO', 17),
+(739, 254, 'EL PEÑOL', 17),
+(740, 256, 'EL ROSARIO', 17),
+(741, 258, 'EL TABLON', 17),
+(742, 260, 'EL TAMBO', 17),
+(743, 287, 'FUNES', 17),
+(744, 317, 'GUACHUCAL', 17),
+(745, 320, 'GUAITARILLA', 17),
+(746, 323, 'GUALMATAN', 17),
+(747, 352, 'ILES', 17),
+(748, 354, 'IMUES', 17),
+(749, 356, 'IPIALES', 17),
+(750, 378, 'LA CRUZ', 17),
+(751, 381, 'LA FLORIDA', 17),
+(752, 385, 'LA LLANADA', 17),
+(753, 390, 'LA TOLA', 17),
+(754, 399, 'LA UNION', 17),
+(755, 405, 'LEIVA', 17),
+(756, 411, 'LINARES', 17),
+(757, 418, 'LOS ANDES (SOTOMAYOR)', 17),
+(758, 427, 'MAGUI (PAYAN)', 17),
+(759, 435, 'MALLAMA (PIEDRANCHA)', 17),
+(760, 473, 'MOSQUERA', 17),
+(761, 490, 'OLAYA HERRERA (BOCAS DE SATINGA)', 17),
+(762, 506, 'OSPINA', 17),
+(763, 520, 'FRANCISCO PIZARRO (SALAHONDA)', 17),
+(764, 540, 'POLICARPA', 17),
+(765, 560, 'POTOSI', 17),
+(766, 565, 'PROVIDENCIA', 17),
+(767, 573, 'PUERRES', 17),
+(768, 585, 'PUPIALES', 17),
+(769, 612, 'RICAURTE', 17),
+(770, 621, 'ROBERTO PAYAN (SAN JOSE)', 17),
+(771, 678, 'SAMANIEGO', 17),
+(772, 683, 'SANDONA', 17),
+(773, 685, 'SAN BERNARDO', 17),
+(774, 687, 'SAN LORENZO', 17),
+(775, 693, 'SAN PABLO', 17),
+(776, 694, 'SAN PEDRO DE CARTAGO', 17),
+(777, 696, 'SANTA BARBARA (ISCUANDE)', 17),
+(778, 699, 'SANTA CRUZ (GUACHAVES)', 17),
+(779, 720, 'SAPUYES', 17),
+(780, 786, 'TAMINANGO', 17),
+(781, 788, 'TANGUA', 17),
+(782, 835, 'TUMACO', 17),
+(783, 838, 'TUQUERRES', 17),
+(784, 885, 'YACUANQUER', 17),
+(785, 1, 'CUCUTA', 18),
+(786, 3, 'ABREGO', 18),
+(787, 51, 'ARBOLEDAS', 18),
+(788, 99, 'BOCHALEMA', 18),
+(789, 109, 'BUCARASICA', 18),
+(790, 125, 'CACOTA', 18),
+(791, 128, 'CACHIRA', 18),
+(792, 172, 'CHINACOTA', 18),
+(793, 174, 'CHITAGA', 18),
+(794, 206, 'CONVENCION', 18),
+(795, 223, 'CUCUTILLA', 18),
+(796, 239, 'DURANIA', 18),
+(797, 245, 'EL CARMEN', 18),
+(798, 250, 'EL TARRA', 18),
+(799, 261, 'EL ZULIA', 18),
+(800, 313, 'GRAMALOTE', 18),
+(801, 344, 'HACARI', 18),
+(802, 347, 'HERRAN', 18),
+(803, 377, 'LABATECA', 18),
+(804, 385, 'LA ESPERANZA', 18),
+(805, 398, 'LA PLAYA', 18),
+(806, 405, 'LOS PATIOS', 18),
+(807, 418, 'LOURDES', 18),
+(808, 480, 'MUTISCUA', 18),
+(809, 498, 'OCAÑA', 18),
+(810, 518, 'PAMPLONA', 18),
+(811, 520, 'PAMPLONITA', 18),
+(812, 553, 'PUERTO SANTANDER', 18),
+(813, 599, 'RAGONVALIA', 18),
+(814, 660, 'SALAZAR', 18),
+(815, 670, 'SAN CALIXTO', 18),
+(816, 673, 'SAN CAYETANO', 18),
+(817, 680, 'SANTIAGO', 18),
+(818, 720, 'SARDINATA', 18),
+(819, 743, 'SILOS', 18),
+(820, 800, 'TEORAMA', 18),
+(821, 810, 'TIBU', 18),
+(822, 820, 'TOLEDO', 18),
+(823, 871, 'VILLACARO', 18),
+(824, 874, 'VILLA DEL ROSARIO', 18),
+(825, 1, 'ARMENIA', 19),
+(826, 111, 'BUENAVISTA', 19),
+(827, 130, 'CALARCA', 19),
+(828, 190, 'CIRCASIA', 19),
+(829, 212, 'CORDOBA', 19),
+(830, 272, 'FILANDIA', 19),
+(831, 302, 'GENOVA', 19),
+(832, 401, 'LA TEBAIDA', 19),
+(833, 470, 'MONTENEGRO', 19),
+(834, 548, 'PIJAO', 19),
+(835, 594, 'QUIMBAYA', 19),
+(836, 690, 'SALENTO', 19),
+(837, 1, 'PEREIRA', 20),
+(838, 45, 'APIA', 20),
+(839, 75, 'BALBOA', 20),
+(840, 88, 'BELEN DE UMBRIA', 20),
+(841, 170, 'DOS QUEBRADAS', 20),
+(842, 318, 'GUATICA', 20),
+(843, 383, 'LA CELIA', 20),
+(844, 400, 'LA VIRGINIA', 20),
+(845, 440, 'MARSELLA', 20),
+(846, 456, 'MISTRATO', 20),
+(847, 572, 'PUEBLO RICO', 20),
+(848, 594, 'QUINCHIA', 20),
+(849, 682, 'SANTA ROSA DE CABAL', 20),
+(850, 687, 'SANTUARIO', 20),
+(851, 1, 'BUCARAMANGA', 21),
+(852, 13, 'AGUADA', 21),
+(853, 20, 'ALBANIA', 21),
+(854, 51, 'ARATOCA', 21),
+(855, 77, 'BARBOSA', 21),
+(856, 79, 'BARICHARA', 21),
+(857, 81, 'BARRANCABERMEJA', 21),
+(858, 92, 'BETULIA', 21),
+(859, 101, 'BOLIVAR', 21),
+(860, 121, 'CABRERA', 21),
+(861, 132, 'CALIFORNIA', 21),
+(862, 147, 'CAPITANEJO', 21),
+(863, 152, 'CARCASI', 21),
+(864, 160, 'CEPITA', 21),
+(865, 162, 'CERRITO', 21),
+(866, 167, 'CHARALA', 21),
+(867, 169, 'CHARTA', 21),
+(868, 176, 'CHIMA', 21),
+(869, 179, 'CHIPATA', 21),
+(870, 190, 'CIMITARRA', 21),
+(871, 207, 'CONCEPCION', 21),
+(872, 209, 'CONFINES', 21),
+(873, 211, 'CONTRATACION', 21),
+(874, 217, 'COROMORO', 21),
+(875, 229, 'CURITI', 21),
+(876, 235, 'EL CARMEN DE CHUCURY', 21),
+(877, 245, 'EL GUACAMAYO', 21),
+(878, 250, 'EL PEÑON', 21),
+(879, 255, 'EL PLAYON', 21),
+(880, 264, 'ENCINO', 21),
+(881, 266, 'ENCISO', 21),
+(882, 271, 'FLORIAN', 21),
+(883, 276, 'FLORIDABLANCA', 21),
+(884, 296, 'GALAN', 21),
+(885, 298, 'GAMBITA', 21),
+(886, 307, 'GIRON', 21),
+(887, 318, 'GUACA', 21),
+(888, 320, 'GUADALUPE', 21),
+(889, 322, 'GUAPOTA', 21),
+(890, 324, 'GUAVATA', 21),
+(891, 327, 'GUEPSA', 21),
+(892, 344, 'HATO', 21),
+(893, 368, 'JESUS MARIA', 21),
+(894, 370, 'JORDAN', 21),
+(895, 377, 'LA BELLEZA', 21),
+(896, 385, 'LANDAZURI', 21),
+(897, 397, 'LA PAZ', 21),
+(898, 406, 'LEBRIJA', 21),
+(899, 418, 'LOS SANTOS', 21),
+(900, 425, 'MACARAVITA', 21),
+(901, 432, 'MALAGA', 21),
+(902, 444, 'MATANZA', 21),
+(903, 464, 'MOGOTES', 21),
+(904, 468, 'MOLAGAVITA', 21),
+(905, 498, 'OCAMONTE', 21),
+(906, 500, 'OIBA', 21),
+(907, 502, 'ONZAGA', 21),
+(908, 522, 'PALMAR', 21),
+(909, 524, 'PALMAS DEL SOCORRO', 21),
+(910, 533, 'PARAMO', 21),
+(911, 547, 'PIEDECUESTA', 21),
+(912, 549, 'PINCHOTE', 21),
+(913, 572, 'PUENTE NACIONAL', 21),
+(914, 573, 'PUERTO PARRA', 21),
+(915, 575, 'PUERTO WILCHES', 21),
+(916, 615, 'RIONEGRO', 21),
+(917, 655, 'SABANA DE TORRES', 21),
+(918, 669, 'SAN ANDRES', 21),
+(919, 673, 'SAN BENITO', 21),
+(920, 679, 'SAN GIL', 21),
+(921, 682, 'SAN JOAQUIN', 21),
+(922, 684, 'SAN JOSE DE MIRANDA', 21),
+(923, 686, 'SAN MIGUEL', 21),
+(924, 689, 'SAN VICENTE DE CHUCURI', 21),
+(925, 705, 'SANTA BARBARA', 21),
+(926, 720, 'SANTA HELENA DEL OPON', 21),
+(927, 745, 'SIMACOTA', 21),
+(928, 755, 'SOCORRO', 21),
+(929, 770, 'SUAITA', 21),
+(930, 773, 'SUCRE', 21),
+(931, 780, 'SURATA', 21),
+(932, 820, 'TONA', 21),
+(933, 855, 'VALLE SAN JOSE', 21),
+(934, 861, 'VELEZ', 21),
+(935, 867, 'VETAS', 21),
+(936, 872, 'VILLANUEVA', 21),
+(937, 895, 'ZAPATOCA', 21),
+(938, 1, 'SINCELEJO', 22),
+(939, 110, 'BUENAVISTA', 22),
+(940, 124, 'CAIMITO', 22),
+(941, 204, 'COLOSO (RICAURTE)', 22),
+(942, 215, 'COROZAL', 22),
+(943, 230, 'CHALAN', 22),
+(944, 235, 'GALERAS (NUEVA GRANADA)', 22),
+(945, 265, 'GUARANDA', 22),
+(946, 400, 'LA UNION', 22),
+(947, 418, 'LOS PALMITOS', 22),
+(948, 429, 'MAJAGUAL', 22),
+(949, 473, 'MORROA', 22),
+(950, 508, 'OVEJAS', 22),
+(951, 523, 'PALMITO', 22),
+(952, 670, 'SAMPUES', 22),
+(953, 678, 'SAN BENITO ABAD', 22),
+(954, 702, 'SAN JUAN DE BETULIA', 22),
+(955, 708, 'SAN MARCOS', 22),
+(956, 713, 'SAN ONOFRE', 22),
+(957, 717, 'SAN PEDRO', 22),
+(958, 742, 'SINCE', 22),
+(959, 771, 'SUCRE', 22),
+(960, 820, 'TOLU', 22),
+(961, 823, 'TOLUVIEJO', 22),
+(962, 1, 'IBAGUE', 23),
+(963, 24, 'ALPUJARRA', 23),
+(964, 26, 'ALVARADO', 23),
+(965, 30, 'AMBALEMA', 23),
+(966, 43, 'ANZOATEGUI', 23),
+(967, 55, 'ARMERO (GUAYABAL)', 23),
+(968, 67, 'ATACO', 23),
+(969, 124, 'CAJAMARCA', 23),
+(970, 148, 'CARMEN APICALA', 23),
+(971, 152, 'CASABIANCA', 23),
+(972, 168, 'CHAPARRAL', 23),
+(973, 200, 'COELLO', 23),
+(974, 217, 'COYAIMA', 23),
+(975, 226, 'CUNDAY', 23),
+(976, 236, 'DOLORES', 23),
+(977, 268, 'ESPINAL', 23),
+(978, 270, 'FALAN', 23),
+(979, 275, 'FLANDES', 23),
+(980, 283, 'FRESNO', 23),
+(981, 319, 'GUAMO', 23),
+(982, 347, 'HERVEO', 23),
+(983, 349, 'HONDA', 23),
+(984, 352, 'ICONONZO', 23),
+(985, 408, 'LERIDA', 23),
+(986, 411, 'LIBANO', 23),
+(987, 443, 'MARIQUITA', 23),
+(988, 449, 'MELGAR', 23),
+(989, 461, 'MURILLO', 23),
+(990, 483, 'NATAGAIMA', 23),
+(991, 504, 'ORTEGA', 23),
+(992, 520, 'PALOCABILDO', 23),
+(993, 547, 'PIEDRAS', 23),
+(994, 555, 'PLANADAS', 23),
+(995, 563, 'PRADO', 23),
+(996, 585, 'PURIFICACION', 23),
+(997, 616, 'RIOBLANCO', 23),
+(998, 622, 'RONCESVALLES', 23),
+(999, 624, 'ROVIRA', 23),
+(1000, 671, 'SALDAÑA', 23),
+(1001, 675, 'SAN ANTONIO', 23),
+(1002, 678, 'SAN LUIS', 23),
+(1003, 686, 'SANTA ISABEL', 23),
+(1004, 770, 'SUAREZ', 23),
+(1005, 854, 'VALLE DE SAN JUAN', 23),
+(1006, 861, 'VENADILLO', 23),
+(1007, 870, 'VILLAHERMOSA', 23),
+(1008, 873, 'VILLARRICA', 23),
+(1009, 1, 'CALI (SANTIAGO DE CALI)', 24),
+(1010, 20, 'ALCALA', 24),
+(1011, 36, 'ANDALUCIA', 24),
+(1012, 41, 'ANSERMANUEVO', 24),
+(1013, 54, 'ARGELIA', 24),
+(1014, 100, 'BOLIVAR', 24),
+(1015, 109, 'BUENAVENTURA', 24),
+(1016, 111, 'BUGA', 24),
+(1017, 113, 'BUGALAGRANDE', 24),
+(1018, 122, 'CAICEDONIA', 24),
+(1019, 126, 'CALIMA (DARIEN)', 24),
+(1020, 130, 'CANDELARIA', 24),
+(1021, 147, 'CARTAGO', 24),
+(1022, 233, 'DAGUA', 24),
+(1023, 243, 'EL AGUILA', 24),
+(1024, 246, 'EL CAIRO', 24),
+(1025, 248, 'EL CERRITO', 24),
+(1026, 250, 'EL DOVIO', 24),
+(1027, 275, 'FLORIDA', 24),
+(1028, 306, 'GINEBRA', 24),
+(1029, 318, 'GUACARI', 24),
+(1030, 364, 'JAMUNDI', 24),
+(1031, 377, 'LA CUMBRE', 24),
+(1032, 400, 'LA UNION', 24),
+(1033, 403, 'LA VICTORIA', 24),
+(1034, 497, 'OBANDO', 24),
+(1035, 520, 'PALMIRA', 24),
+(1036, 563, 'PRADERA', 24),
+(1037, 606, 'RESTREPO', 24),
+(1038, 616, 'RIOFRIO', 24),
+(1039, 622, 'ROLDANILLO', 24),
+(1040, 670, 'SAN PEDRO', 24),
+(1041, 736, 'SEVILLA', 24),
+(1042, 823, 'TORO', 24),
+(1043, 828, 'TRUJILLO', 24),
+(1044, 834, 'TULUA', 24),
+(1045, 845, 'ULLOA', 24),
+(1046, 863, 'VERSALLES', 24),
+(1047, 869, 'VIJES', 24),
+(1048, 890, 'YOTOCO', 24),
+(1049, 892, 'YUMBO', 24),
+(1050, 895, 'ZARZAL', 24),
+(1051, 1, 'ARAUCA', 25),
+(1052, 65, 'ARAUQUITA', 25),
+(1053, 220, 'CRAVO NORTE', 25),
+(1054, 300, 'FORTUL', 25),
+(1055, 591, 'PUERTO RONDON', 25),
+(1056, 736, 'SARAVENA', 25),
+(1057, 794, 'TAME', 25),
+(1058, 1, 'YOPAL', 26),
+(1059, 10, 'AGUAZUL', 26),
+(1060, 15, 'CHAMEZA', 26),
+(1061, 125, 'HATO COROZAL', 26),
+(1062, 136, 'LA SALINA', 26),
+(1063, 139, 'MANI', 26),
+(1064, 162, 'MONTERREY', 26),
+(1065, 225, 'NUNCHIA', 26),
+(1066, 230, 'OROCUE', 26),
+(1067, 250, 'PAZ DE ARIPORO', 26),
+(1068, 263, 'PORE', 26),
+(1069, 279, 'RECETOR', 26),
+(1070, 300, 'SABANALARGA', 26),
+(1071, 315, 'SACAMA', 26),
+(1072, 325, 'SAN LUIS DE PALENQUE', 26),
+(1073, 400, 'TAMARA', 26),
+(1074, 410, 'TAURAMENA', 26),
+(1075, 430, 'TRINIDAD', 26),
+(1076, 440, 'VILLANUEVA', 26),
+(1077, 1, 'MOCOA', 27),
+(1078, 219, 'COLON', 27),
+(1079, 320, 'ORITO', 27),
+(1080, 568, 'PUERTO ASIS', 27),
+(1081, 569, 'PUERTO CAICEDO', 27),
+(1082, 571, 'PUERTO GUZMAN', 27),
+(1083, 573, 'PUERTO LEGUIZAMO', 27),
+(1084, 749, 'SIBUNDOY', 27),
+(1085, 755, 'SAN FRANCISCO', 27),
+(1086, 757, 'SAN MIGUEL (LA DORADA)', 27),
+(1087, 760, 'SANTIAGO', 27),
+(1088, 865, 'LA HORMIGA (VALLE DEL GUAMUEZ)', 27),
+(1089, 885, 'VILLAGARZON', 27),
+(1090, 1, 'SAN ANDRES', 28),
+(1091, 564, 'PROVIDENCIA', 28),
+(1092, 1, 'LETICIA', 29),
+(1093, 263, 'EL ENCANTO', 29),
+(1094, 405, 'LA CHORRERA', 29),
+(1095, 407, 'LA PEDRERA', 29),
+(1096, 430, 'LA VICTORIA', 29),
+(1097, 460, 'MIRITI-PARANA', 29),
+(1098, 530, 'PUERTO ALEGRIA', 29),
+(1099, 536, 'PUERTO ARICA', 29),
+(1100, 540, 'PUERTO NARIÑO', 29),
+(1101, 669, 'PUERTO SANTANDER', 29),
+(1102, 798, 'TARAPACA', 29),
+(1103, 1, 'PUERTO INIRIDA', 30),
+(1104, 343, 'BARRANCO MINAS', 30),
+(1105, 883, 'SAN FELIPE', 30),
+(1106, 884, 'PUERTO COLOMBIA', 30),
+(1107, 885, 'LA GUADALUPE', 30),
+(1108, 886, 'CACAHUAL', 30),
+(1109, 887, 'PANA PANA (CAMPO ALEGRE)', 30),
+(1110, 888, 'MORICHAL (MORICHAL NUEVO)', 30),
+(1111, 1, 'SAN JOSE DEL GUAVIARE', 31),
+(1112, 15, 'CALAMAR', 31),
+(1113, 25, 'EL RETORNO', 31),
+(1114, 200, 'MIRAFLORES', 31),
+(1115, 1, 'MITU', 32),
+(1116, 161, 'CARURU', 32),
+(1117, 511, 'PACOA', 32),
+(1118, 666, 'TARAIRA', 32),
+(1119, 777, 'PAPUNAUA (MORICHAL)', 32),
+(1120, 889, 'YAVARATE', 32),
+(1121, 1, 'PUERTO CARREÑO', 33),
+(1122, 524, 'LA PRIMAVERA', 33),
+(1123, 572, 'SANTA RITA', 33),
+(1124, 666, 'SANTA ROSALIA', 33),
+(1125, 760, 'SAN JOSE DE OCUNE', 33),
+(1126, 773, 'CUMARIBO', 33);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productos`
+--
+
+CREATE TABLE `productos` (
+  `id_producto` int(11) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `estado` bit(1) NOT NULL,
+  `fecha_publicacion` date DEFAULT NULL,
+  `num_contacto` varchar(255) DEFAULT NULL,
+  `precio` double NOT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `id_ubicacion` int(11) DEFAULT NULL,
+  `id_subcategoria` int(11) DEFAULT NULL,
+  `correo_contacto` varchar(255) DEFAULT NULL,
+  `id_usuario` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `productos`
+--
+
+INSERT INTO `productos` (`id_producto`, `descripcion`, `direccion`, `estado`, `fecha_publicacion`, `num_contacto`, `precio`, `titulo`, `id_ubicacion`, `id_subcategoria`, `correo_contacto`, `id_usuario`) VALUES
+(1, 'Este es un Ejemplo', 'Toledo Campestre Casa 27-01', b'0', '2020-04-15', '3057970008', 23000, 'Ejemplo Perron', 422, 1, '13n1478963', '1004917211');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subcategorias`
+--
+
+CREATE TABLE `subcategorias` (
+  `id_sub_categoria` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `id_categoria` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `subcategorias`
+--
+
+INSERT INTO `subcategorias` (`id_sub_categoria`, `nombre`, `id_categoria`) VALUES
+(1, 'Mesas', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `correo` varchar(255) NOT NULL,
+  `dni` varchar(255) NOT NULL,
+  `apellido` varchar(255) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `telefono` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`correo`, `dni`, `apellido`, `direccion`, `fecha_nacimiento`, `nombre`, `password`, `telefono`) VALUES
+('13n1478963', '1004917211', 'duran', 'toledo Campestre Casa 27-01', '2020-04-13', 'Nicolas', '1004918211', '3047970008');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `administradore`
+--
+ALTER TABLE `administradore`
+  ADD PRIMARY KEY (`correo`,`dni`),
+  ADD KEY `FKpkng02b1s2pp3bv449j0ocace` (`id_cargo`);
+
+--
+-- Indexes for table `cargos`
+--
+ALTER TABLE `cargos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id_chat`),
+  ADD KEY `FKlcdtc9627o97bye6alwq40rvb` (`correo_cliente`,`dni_cliente`),
+  ADD KEY `FKkow8irvwyx6wuciu8sjw7qsuw` (`correo_ofertador`,`dni_ofertador`);
+
+--
+-- Indexes for table `departamentos`
+--
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `imgproducto`
+--
+ALTER TABLE `imgproducto`
+  ADD PRIMARY KEY (`id_img_producto`),
+  ADD KEY `FK8cvowsoipif37q3v8d3ya9c3r` (`id_producto`);
+
+--
+-- Indexes for table `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD PRIMARY KEY (`id_chat`,`id_mensaje`),
+  ADD KEY `FKigsp0ffi3bbdn0pq7shrqr06o` (`correo_remitente`,`dni_remitente`);
+
+--
+-- Indexes for table `municipios`
+--
+ALTER TABLE `municipios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKc2c839fcdfxwfd110ydm64fid` (`departamento_id`);
+
+--
+-- Indexes for table `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id_producto`),
+  ADD KEY `FKbwoxsvelyulwlb7iajgejhsv9` (`id_ubicacion`),
+  ADD KEY `FKtim3jm3v6kow02wxqthc7e1ws` (`id_subcategoria`),
+  ADD KEY `FKfqwx2murghcijd3118e9ibd2q` (`correo_contacto`,`id_usuario`);
+
+--
+-- Indexes for table `subcategorias`
+--
+ALTER TABLE `subcategorias`
+  ADD PRIMARY KEY (`id_sub_categoria`),
+  ADD KEY `FKtjg6rtuadc9msnoeliyc48dm2` (`id_categoria`);
+
+--
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`correo`,`dni`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `cargos`
+--
+ALTER TABLE `cargos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id_chat` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `departamentos`
+--
+ALTER TABLE `departamentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `imgproducto`
+--
+ALTER TABLE `imgproducto`
+  MODIFY `id_img_producto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `municipios`
+--
+ALTER TABLE `municipios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1127;
+
+--
+-- AUTO_INCREMENT for table `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `subcategorias`
+--
+ALTER TABLE `subcategorias`
+  MODIFY `id_sub_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `administradore`
+--
+ALTER TABLE `administradore`
+  ADD CONSTRAINT `FKpkng02b1s2pp3bv449j0ocace` FOREIGN KEY (`id_cargo`) REFERENCES `cargos` (`id`);
+
+--
+-- Constraints for table `chat`
+--
+ALTER TABLE `chat`
+  ADD CONSTRAINT `FKkow8irvwyx6wuciu8sjw7qsuw` FOREIGN KEY (`correo_ofertador`,`dni_ofertador`) REFERENCES `usuarios` (`correo`, `dni`),
+  ADD CONSTRAINT `FKlcdtc9627o97bye6alwq40rvb` FOREIGN KEY (`correo_cliente`,`dni_cliente`) REFERENCES `usuarios` (`correo`, `dni`);
+
+--
+-- Constraints for table `imgproducto`
+--
+ALTER TABLE `imgproducto`
+  ADD CONSTRAINT `FK8cvowsoipif37q3v8d3ya9c3r` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`);
+
+--
+-- Constraints for table `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD CONSTRAINT `FK3ca32ynifh777t3o71h126i9s` FOREIGN KEY (`id_chat`) REFERENCES `chat` (`id_chat`),
+  ADD CONSTRAINT `FKigsp0ffi3bbdn0pq7shrqr06o` FOREIGN KEY (`correo_remitente`,`dni_remitente`) REFERENCES `usuarios` (`correo`, `dni`);
+
+--
+-- Constraints for table `municipios`
+--
+ALTER TABLE `municipios`
+  ADD CONSTRAINT `FKc2c839fcdfxwfd110ydm64fid` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id`);
+
+--
+-- Constraints for table `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `FKbwoxsvelyulwlb7iajgejhsv9` FOREIGN KEY (`id_ubicacion`) REFERENCES `municipios` (`id`),
+  ADD CONSTRAINT `FKfqwx2murghcijd3118e9ibd2q` FOREIGN KEY (`correo_contacto`,`id_usuario`) REFERENCES `usuarios` (`correo`, `dni`),
+  ADD CONSTRAINT `FKtim3jm3v6kow02wxqthc7e1ws` FOREIGN KEY (`id_subcategoria`) REFERENCES `subcategorias` (`id_sub_categoria`);
+
+--
+-- Constraints for table `subcategorias`
+--
+ALTER TABLE `subcategorias`
+  ADD CONSTRAINT `FKtjg6rtuadc9msnoeliyc48dm2` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`);
