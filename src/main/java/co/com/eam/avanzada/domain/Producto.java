@@ -1,0 +1,128 @@
+package co.com.eam.avanzada.domain;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import lombok.Data;
+
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the productos database table.
+ * 
+ */
+@Entity
+@Data
+@Table(name="productos")
+@NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+public class Producto implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer idProducto;
+	
+	@NotBlank(message = "El campo descripción es obligatorio")
+	private String descripcion;
+
+	@NotBlank(message = "El campo dirección es obligatorio")
+	private String direccion;
+	
+	@NotNull(message = "El campo estado es obligatorio")
+	private boolean estado;
+
+	@Temporal(TemporalType.DATE)
+	//@NotNull(message = "El campo fecha de publicación es obligatorio")
+	private Date fechaPublicacion;
+
+	@NotBlank(message = "El campo teléfono de contácto es obligatorio")
+	private String numContacto;
+
+	//@NotBlank(message = "El campo precio es obligatorio")
+	@NotNull(message = "El campo precio es obligatorio")
+	private double precio;
+
+	@NotBlank(message = "El campo título es obligatorio")
+	private String titulo;
+
+	//bi-directional many-to-one association to Imgproducto
+	@OneToMany(mappedBy="producto")
+	private List<Imgproducto> imgproductos;
+
+	//bi-directional many-to-one association to Municipio
+	@ManyToOne
+	@JoinColumn(name="IdUbicacion")
+	private Municipio municipio;
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="correoContacto", referencedColumnName="correo"),
+		@JoinColumn(name="idUsuario", referencedColumnName="dni")
+		})
+	private Usuario usuario;
+
+	//bi-directional many-to-one association to Subcategoria
+	@ManyToOne
+	@JoinColumn(name="idSubcategoria")
+	private Subcategoria subcategoria;
+
+	
+	public Imgproducto addImgproducto(Imgproducto imgproducto) {
+		getImgproductos().add(imgproducto);
+		imgproducto.setProducto(this);
+
+		return imgproducto;
+	}
+
+	public Imgproducto removeImgproducto(Imgproducto imgproducto) {
+		getImgproductos().remove(imgproducto);
+		imgproducto.setProducto(null);
+
+		return imgproducto;
+	}
+
+	
+	
+	
+
+	public Producto() {
+		super();
+	}
+
+	public Producto(Integer idProducto, @NotBlank(message = "El campo descripción es obligatorio") String descripcion,
+			@NotBlank(message = "El campo dirección es obligatorio") String direccion,
+			@NotNull(message = "El campo estado es obligatorio") boolean estado,
+			Date fechaPublicacion,
+			@NotBlank(message = "El campo teléfono de contácto es obligatorio") String numContacto,
+			@NotNull(message = "El campo precio es obligatorio") double precio,
+			@NotBlank(message = "El campo título es obligatorio") String titulo, 
+			List<Imgproducto> imgproductos,
+			Municipio municipio, 
+			Usuario usuario, 
+			Subcategoria subcategoria) {
+		super();
+		this.idProducto = idProducto;
+		this.descripcion = descripcion;
+		this.direccion = direccion;
+		this.estado = estado;
+		this.fechaPublicacion = fechaPublicacion;
+		this.numContacto = numContacto;
+		this.precio = precio;
+		this.titulo = titulo;
+		this.imgproductos = imgproductos;
+		this.municipio = municipio;
+		this.usuario = usuario;
+		this.subcategoria = subcategoria;
+	}
+
+	
+	
+	
+
+
+}
