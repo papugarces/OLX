@@ -15,7 +15,7 @@
 	<description>Entrega Final Del Proyecto de OLX De Programacion de Apps Empresariales</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.8</java.version> //
 	</properties>
 
 	<dependencies>
