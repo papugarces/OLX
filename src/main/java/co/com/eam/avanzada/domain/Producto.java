@@ -35,7 +35,6 @@ public class Producto implements Serializable {
 	@NotNull(message = "El campo estado es obligatorio")
 	private boolean estado;
 
-	@Temporal(TemporalType.DATE)
 	//@NotNull(message = "El campo fecha de publicación es obligatorio")
 	private Date fechaPublicacion;
 

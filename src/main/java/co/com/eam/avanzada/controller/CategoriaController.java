@@ -24,7 +24,7 @@ public class CategoriaController {
         this.categoriaRepository = categoriaRepository;
     }
     
-    //controlador Agregar---------------------------------------------
+    //metodo Agregar---------------------------------------------
     @GetMapping("/signcategoria")
     public String showSignUpForm(Categoria categoria) {
         return "add-categoria";
@@ -41,7 +41,7 @@ public class CategoriaController {
         return "lista-categoria";
     }
     
-    //controlador Actualizar---------------------------------------------
+    //metodo Actualizar---------------------------------------------
     @GetMapping("/editCategoria/{idCategoria}")
     public String showUpdateForm(@PathVariable("idCategoria") int idCategoria, Model model) {
     	Categoria categoria = categoriaRepository.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
@@ -61,7 +61,7 @@ public class CategoriaController {
         return "lista-categoria";
     }
     
-    //controlador Eliminar---------------------------------------------
+    //metodo Eliminar---------------------------------------------
     @GetMapping("/deleteCategoria/{idCategoria}")
     public String deleteCategoria(@PathVariable("idCategoria") int idCategoria, Model model) {
     	Categoria categoria = categoriaRepository.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));

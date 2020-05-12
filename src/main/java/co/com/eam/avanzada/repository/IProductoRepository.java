@@ -13,7 +13,7 @@ import co.com.eam.avanzada.domain.Producto;
  
 public interface IProductoRepository extends CrudRepository<Producto, Integer> {
 	
-	//----------Consulta para traer los productos a mostrar -----------
+		//----------Consulta para traer los productos a mostrar -----------
 	
 			@Query("SELECT p FROM Producto p " + 
 					" JOIN p.municipio m  JOIN m.departamento d WHERE p.estado = true")

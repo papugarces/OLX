@@ -22,7 +22,7 @@ public class SubCategoriaController {
         this.subCategoriaRepository = subCategoriaRepository;
     }
     
-    //controlador Agregar---------------------------------------------
+    //metodo Agregar---------------------------------------------
     @GetMapping("/singsubcategoria")
     public String showSignUpForm(Subcategoria subcategoria) {
         return "add-subCategoria";
@@ -39,7 +39,7 @@ public class SubCategoriaController {
         return "lista-subCategoria";
     }
     
-    //controlador Actualizar---------------------------------------------
+    //metodo Actualizar---------------------------------------------
     @GetMapping("/editSubCategoria/{idSubCategoria}")
     public String showUpdateForm(@PathVariable("idSubCategoria") int idSubCategoria, Model model) {
     	Subcategoria subcategoria = subCategoriaRepository.findById(idSubCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido SubCategoria idSubCategoria:" + idSubCategoria));
@@ -59,7 +59,7 @@ public class SubCategoriaController {
         return "lista-subCategoria";
     }
     
-    //controlador Eliminar---------------------------------------------
+    //metodo Eliminar---------------------------------------------
     @GetMapping("/deleteSubCategoria/{idSubCategoria}")
     public String deleteSubCategoria(@PathVariable("idSubCategoria") int idSubCategoria, Model model) {
     	Subcategoria subcategoria = subCategoriaRepository.findById(idSubCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido SubCategoria idSubCategoria:" + idSubCategoria));
@@ -68,7 +68,7 @@ public class SubCategoriaController {
         return "lista-subCategoria";
     }
     
-    //controlador Para Ver El Listado---------------------------------------------
+    //metodo Para Ver El Listado---------------------------------------------
     @GetMapping("/listasubcategoria")
     public String listSubCategoria(Subcategoria subcategoria, Model model) {
         model.addAttribute("subcategorias", subCategoriaRepository.findAll());

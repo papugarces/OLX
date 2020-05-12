@@ -1,10 +1,90 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<h2>Listado de productos</h2>
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Producto</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/shards.min.css">
+    </head>
+    <body>
+    	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	        <a class="navbar-brand" href="#">OLX</a>
+	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	            <ul class="navbar-nav mr-auto">
+	                <li class="nav-item">
+	                    <a class="nav-link" href="/signcategoria">Gestion Categorias</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="/singsubcategoria">Gestion SubCategorias</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="/singusuario">Gestion Usuario</a>
+	                </li>
+	                <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          Productos
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="/singproducto">Gestion Producto</a>
+				          <a class="dropdown-item" href="/productos-disponibles">Productos Disponibles</a>
+				        </div>
+				    </li>
+	            </ul>
+	        </div>
+	    </nav>
+        <div th:switch="${productos}" class="container my-5">
+            <div class="row">
+                <div class="col-md-10">
+                    <h2 th:case="null">Listado de Productos</h2>
+                    <div th:case="*">
+                        <h2 class="my-5">Listado de Productos</h2>
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                                <tr>
+                                	<th>Producto</th>
+                                    <th>Descripcion</th>
+                                    <th>Direccion</th>
+                                    <th>Precio</th>
+                                    <th>fecha de Publicacion</th>
+                                    <th>Municipio</th>
+                                    <th>SubCategoria</th>
+                                    <th>Usuario</th>
+                                    <th>Correo del usuario</th>
+                                    <th>numero de contacto</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="producto : ${productos}">
+									<td th:text="${producto.titulo}"></td>
+                                    <td th:text="${producto.descripcion}"></td>
+                                    <td th:text="${producto.direccion}"></td>
+                                    <td th:text="'$'+${producto.precio}"></td>
+                                    <td th:text="${#dates.format(producto.fechaPublicacion, 'dd-MMM-yyyy')}"></td>                     
+                                    <td th:text="${producto.municipio.nombre}"></td>
+                                    <td th:text="${producto.subcategoria.nombre}"></td>
+                                    <td th:text="${producto.usuario.nombre}"></td>
+                                    <td th:text="${producto.usuario.id.correo}"></td>
+                                    <td th:text="${producto.numContacto}"></td>
+                                    
+                                    
+                                    <td><a th:href="@{/editproducto/{idProducto}(idProducto=${producto.idProducto})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                                    <td><a th:href="@{/deleteproducto/{idProducto}(idProducto=${producto.idProducto})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>      
+                    <p class="my-5"><a href="/singproducto" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
 </html>

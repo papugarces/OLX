@@ -24,7 +24,7 @@ public class UsuarioController {
 		this.iUsuarioRepository = iUsuarioRepository;
 	}
 	
-	//controlador Agregar---------------------------------------------
+	//metodo Agregar---------------------------------------------
     @GetMapping("/singusuario")
     public String showSignUpForm(Usuario usuario) {
         return "add-user";
@@ -41,7 +41,7 @@ public class UsuarioController {
         return "lista-user";
     }
     
-    //controlador Actualizar---------------------------------------------
+    //metodo Actualizar---------------------------------------------
     @GetMapping("/editusuario/{id}/{correo}")
     public String showUpdateForm(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {
     	UsuarioPK primary = new UsuarioPK();
@@ -58,7 +58,7 @@ public class UsuarioController {
     		UsuarioPK primary = new UsuarioPK();
         	primary.setDni(id);
         	primary.setCorreo(correo);
-        	usuario.setId(primary);;
+        	usuario.setId(primary);
             return "update-user";
         }
         
@@ -67,7 +67,7 @@ public class UsuarioController {
         return "lista-user";
     }
     
-    //controlador Eliminar---------------------------------------------
+    //metodo Eliminar---------------------------------------------
     @GetMapping("/deleteusuario/{id}/{correo}")
     public String deleteUsuario(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {
     	UsuarioPK primary = new UsuarioPK();

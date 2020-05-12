@@ -1,5 +1,7 @@
 package co.com.eam.avanzada.controller;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import co.com.eam.avanzada.domain.Categoria;
 import co.com.eam.avanzada.domain.Chat;
 import co.com.eam.avanzada.domain.Mensaje;
 import co.com.eam.avanzada.domain.MensajePK;
@@ -34,60 +39,62 @@ public class MensajeController {
 		this.chatRepository = chatRepository;
 	}
     
-    @GetMapping("/signupmensaje")
-    public String showSignUpForm(Mensaje mensaje) {
-        return "add-mensaje";
+     
+    //metodo Agregar---------------------------------------------
+    @GetMapping("/singnchat")
+    public String showSignUpForm(UsuarioPK user1,UsuarioPK user2,Model model) {
+    	model.addAttribute("usuarios", usuarioRepository.findAll());
+        return "add-chat";
     }
     
+    @PostMapping("/addchat")
+    public String addChat(@Valid UsuarioPK user1,@Valid UsuarioPK user2, BindingResult result, Model model) {
+    	Chat chat = new Chat();
+    	Mensaje mensaje = new Mensaje();
+    	if (result.hasErrors()) {
+        	Usuario cliente = usuarioRepository.findById(user1).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario id:" + user1));
+        	Usuario ofertador = usuarioRepository.findById(user2).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario id:" + user1));
+        	
+        	chat.setUsuario1(cliente);
+        	chat.setUsuario2(ofertador);
+        	MensajePK idMensaje = new MensajePK();
+        	idMensaje.setChat(chat);
+        	mensaje.setId(idMensaje);
+            return "add-chat";
+        }
 
-	@GetMapping("/addmensaje")
-    public String addMensaje(@Valid Mensaje mensajes, BindingResult result, Model model) {
-		UsuarioPK primaria = new UsuarioPK();
-		UsuarioPK primaria2 = new UsuarioPK();
-        primaria.setCorreo("ejemplo3@awd.com");
-        primaria.setDni("1097");
-        
-        primaria2.setCorreo("ejemplo4@awd.cp");
-        primaria2.setDni("1098");
-        
-        Usuario cliente = usuarioRepository.findById(primaria).get();
-        Usuario Ofertador = usuarioRepository.findById(primaria2).get();
-
-		Chat chat = new Chat();
-        
-        //chat.setUsuario1(cliente);
-        //chat.setUsuario2(Ofertador);
-        //chatRepository.save(chat);
-        
-        chat = chatRepository.findById(1).get();
-        Mensaje mensaje = new  Mensaje();
-        MensajePK idMensaje = new MensajePK();
-        idMensaje.setChat(chat);
-        idMensaje.setIdMensaje(1);//este se debe cambiar
-        mensaje.setId(idMensaje);
-        mensaje.setFechaEnvio(null);
-        mensaje.setUsuario(Ofertador);
-       // mensaje.setUsuario(cliente);
-        mensaje.setTexto("");
-        
-        
+        chatRepository.save(chat);
         mensajeRepository.save(mensaje);
-        
-        return "add-mensaje";
-    }
-	
-	
-	@GetMapping("/verMensajes")
-    public String verChat(@Valid Mensaje mensajes, BindingResult result, Model model) {
-		Iterable<Mensaje> lista = mensajeRepository.cargarMensajes("1097", "1098");
-    	for (Mensaje mensaje : lista) {
-    		
-    		System.out.println(mensaje.getUsuario().getNombre()+" : "+mensaje.getTexto());
-		}
-        
+        model.addAttribute("mensaje", mensajeRepository.findById(mensaje.getId()));
+        model.addAttribute("envia", user1);
         return "add-mensaje";
     }
     
+    //metodo Actualizar---------------------------------------------
+    @GetMapping("/addmensaje/{mensaje}/{envia}")
+    public String showUpdateForm(@PathVariable("mensaje") Mensaje mensaje,@PathVariable("envia") Usuario envia, Model model) {
+        model.addAttribute("mensaje", mensaje);
+        return "add-mensaje";
+    }
     
+    @PostMapping("/cargarmensaje")
+    public String addMensaje(@Valid Mensaje msn, BindingResult result, Model model) {
+    	Chat chat = new Chat();
+    	Mensaje mensaje = new Mensaje();
+    	if (result.hasErrors()) {
+    		MensajePK idMensaje = new MensajePK();
+    		idMensaje.setChat(msn.getId().getChat());
+        	mensaje.setId(idMensaje);
+        	mensaje.setFechaEnvio(msn.getFechaEnvio());
+        	mensaje.setTexto(msn.getTexto());
+        	mensaje.setUsuario(msn.getUsuario());
+            return "add-mensaje";
+        }
+
+        mensajeRepository.save(mensaje);
+        model.addAttribute("mensaje", mensajeRepository.cargarMensajes(mensaje.getUsuario().getId().getDni(),mensaje.getId().getChat().getUsuario2().getId().getDni()));
+        return "add-mensaje";
+    }
+  
 
 }
