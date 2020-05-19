@@ -1,5 +1,7 @@
 package co.com.eam.avanzada.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +12,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import co.com.eam.avanzada.domain.Subcategoria;
+import co.com.eam.avanzada.domain.Categoria;
+import co.com.eam.avanzada.repository.ICategoriaRepository;
 import co.com.eam.avanzada.repository.ISubcategoriaRepository;
 
 @Controller
 public class SubCategoriaController {
 	private final ISubcategoriaRepository subCategoriaRepository;
+	
+	private final ICategoriaRepository categoriaRepository;
 
     @Autowired
-    public SubCategoriaController(ISubcategoriaRepository subCategoriaRepository) {
+    public SubCategoriaController(ISubcategoriaRepository subCategoriaRepository,ICategoriaRepository categoriaRepository) {
         this.subCategoriaRepository = subCategoriaRepository;
+        this.categoriaRepository = categoriaRepository;
     }
     
     //metodo Agregar---------------------------------------------
     @GetMapping("/singsubcategoria")
-    public String showSignUpForm(Subcategoria subcategoria) {
+    public String showSignUpForm(Subcategoria subcategoria,Model model) {
+    	model.addAttribute("categorias", categoriaRepository.findAll());
         return "add-subCategoria";
     }
     
