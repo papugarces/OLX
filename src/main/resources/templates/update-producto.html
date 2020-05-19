@@ -1,130 +1,172 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Update Producto</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/shards.min.css">
-    </head>
-    <body>
-    	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	        <a class="navbar-brand" href="#">OLX</a>
-	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/signcategoria">Gestion Categorias</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/singsubcategoria">Gestion SubCategorias</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/singusuario">Gestion Usuario</a>
-	                </li>
-	                <li class="nav-item dropdown">
-				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				          Productos
-				        </a>
-				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="/singproducto">Gestion Producto</a>
-				          <a class="dropdown-item" href="/productos-disponibles">Productos Disponibles</a>
-				        </div>
-				    </li>
-	            </ul>
-	        </div>
-	    </nav>
-        <div class="container my-5">
-            <h2 class="mb-5">Update Producto</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <form action="#" th:action="@{/updateproducto/{idProducto}(idProducto=${producto.idProducto})}" th:object="${producto}" method="post">
-                        <div class="row">
-                        	<div class="form-group col-md-6">
-                                <label for="titulo" class="col-form-label">Titulo</label>
-                                <input type="text" th:field="*{titulo}" class="form-control" id="titulo" placeholder="titulo" required="required">
-                                <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="text-danger"></span>
-                            </div>    
-                            <div class="form-group col-md-6">
-                                <label for="descripcion" class="col-form-label">Descripcion</label>
-                                <input type="text" th:field="*{descripcion}" class="form-control" id="descripcion" >
-                                <span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="direccion" class="col-form-label">Direccion</label>
-                                <input type="text" th:field="*{direccion}" class="form-control" id="direccion" placeholder="..." required="required">
-                                <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="estado" class="col-form-label">Estado</label>
-                                <select th:field="*{estado}" class="custom-select" id="validationTooltip04"  >
-                        			<option th:value="${true}" >Activo</option>
-                        			<option th:value="${false}" th:selected="false">Inactivo</option>
-                    			</select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="fechaPublicacion" class="col-form-label">Fecha de Publicacion</label>
-                                <input type="text" th:field="*{fechaPublicacion}" class="form-control" id="fechaPublicacion" placeholder="DD/MM/YYYY" required="required">
-                                <span th:if="${#fields.hasErrors('fechaPublicacion')}" th:errors="*{fechaPublicacion}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                            	<label for="validationTooltip04">Usuario</label>
-                      			<select th:field="*{usuario.id.dni}" class="custom-select" id="validationTooltip04" >
-                        			<option th:each="usuario : ${usuarios}" th:value="${usuario.id.dni}"
-                        			th:text="${usuario.nombre}+' '+${usuario.apellido}"/>
-                    			</select>
-                    			<span th:if="${#fields.hasErrors('usuario.id.dni')}" th:errors="*{usuario.id.dni}" class="text-danger"></span>
-                    		</div>
-                    		<div class="form-group col-md-6">
-                            	<label for="validationTooltip04">Correo</label>
-                      			<select th:field="*{usuario.id.correo}" class="custom-select" id="validationTooltip04" >
-                        			<option th:each="usuario : ${usuarios}" th:value="${usuario.id.correo}"
-                        			th:text="${usuario.id.correo}"/>
-                    			</select>
-                    			<span th:if="${#fields.hasErrors('usuario.id.correo')}" th:errors="*{usuario.id.correo}" class="text-danger"></span>
-                    		</div>
-                            <div class="form-group col-md-6">
-                                <label for="numContacto" class="col-form-label">Numero de contacto</label>
-                                <input type="number" th:field="*{numContacto}" class="form-control" id="numContacto" placeholder="#"  required="required">
-                                <span th:if="${#fields.hasErrors('numContacto')}" th:errors="*{numContacto}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="precio" class="col-form-label">Precio del producto</label>
-                                <input type="number" th:field="*{precio}" class="form-control" id="precio" placeholder="$" required="required">
-                                <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                            	<label for="validationTooltip04">Municipio</label>
-                      			<select th:field="*{municipio.id}" class="custom-select" id="validationTooltip04"  >
-                        			<option th:each="municipio : ${municipios}" th:value="${municipio.id}"
-                        			th:text="${municipio.nombre}" th:selected="false"/>
-                    			</select>
-                    			<span th:if="${#fields.hasErrors('municipio.id')}" th:errors="*{municipio.id}" class="text-danger"></span>
-                            </div>
-                            
-                           	<div class="form-group col-md-6">
-                           		<label for="validationTooltip04">SubCategoria</label>
-                      			<select th:field="*{subcategoria.idSubCategoria}" class="custom-select" id="validationTooltip04"  >
-                        			<option th:each="subcategoria : ${subcategorias}" th:value="${subcategoria.idSubCategoria}"
-                        			th:text="${subcategoria.nombre}" th:selected="false"/>
-                    			</select>
-                    			<span th:if="${#fields.hasErrors('subcategoria.idSubCategoria')}" th:errors="*{subcategoria.idSubCategoria}" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mt-5">
-                                <input type="submit" class="btn btn-primary" value="Update Producto">
-                            </div>
-                        </div>    
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    </body>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Update Producto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">OLX</a>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/signcategoria">Gestion
+						Categorias</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/singsubcategoria">Gestion SubCategorias</a></li>
+				<li class="nav-item"><a class="nav-link" href="/singusuario">Gestion
+						Usuario</a></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Productos </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="/singproducto">Gestion Producto</a>
+						<a class="dropdown-item" href="/productos-disponibles">Productos
+							Disponibles</a>
+					</div></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container my-5">
+		<h2 class="mb-5">Update Producto</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="#"
+					th:action="@{/updateproducto/{idProducto}(idProducto=${producto.idProducto})}"
+					th:object="${producto}" method="post">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="titulo" class="col-form-label">Titulo</label> <input
+								type="text" th:field="*{titulo}" class="form-control"
+								id="titulo" placeholder="titulo" required="required"> <span
+								th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"
+								class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="descripcion" class="col-form-label">Descripcion</label>
+							<input type="text" th:field="*{descripcion}" class="form-control"
+								id="descripcion"> <span
+								th:if="${#fields.hasErrors('descripcion')}"
+								th:errors="*{descripcion}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="direccion" class="col-form-label">Direccion</label> <input
+								type="text" th:field="*{direccion}" class="form-control"
+								id="direccion" placeholder="..." required="required"> <span
+								th:if="${#fields.hasErrors('direccion')}"
+								th:errors="*{direccion}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="estado" class="col-form-label">Estado</label> <select
+								th:field="*{estado}" class="custom-select"
+								id="validationTooltip04">
+								<option th:value="${true}">Activo</option>
+								<option th:value="${false}" th:selected="false">Inactivo</option>
+							</select>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="fechaPublicacion" class="col-form-label">Fecha
+								de Publicacion</label> <input type="text" th:field="*{fechaPublicacion}"
+								class="form-control" id="fechaPublicacion"
+								placeholder="DD/MM/YYYY" required="required"> <span
+								th:if="${#fields.hasErrors('fechaPublicacion')}"
+								th:errors="*{fechaPublicacion}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="validationTooltip04">Usuario</label> <select
+								th:field="*{usuario.id.dni}" class="custom-select"
+								id="validationTooltip04">
+								<option th:each="usuario : ${usuarios}"
+									th:value="${usuario.id.dni}"
+									th:text="${usuario.nombre}+' '+${usuario.apellido}" />
+							</select> <span th:if="${#fields.hasErrors('usuario.id.dni')}"
+								th:errors="*{usuario.id.dni}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="validationTooltip04">Correo</label> <select
+								th:field="*{usuario.id.correo}" class="custom-select"
+								id="validationTooltip04">
+								<option th:each="usuario : ${usuarios}"
+									th:value="${usuario.id.correo}" th:text="${usuario.id.correo}" />
+							</select> <span th:if="${#fields.hasErrors('usuario.id.correo')}"
+								th:errors="*{usuario.id.correo}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="numContacto" class="col-form-label">Numero de
+								contacto</label> <input type="number" th:field="*{numContacto}"
+								class="form-control" id="numContacto" placeholder="#"
+								required="required"> <span
+								th:if="${#fields.hasErrors('numContacto')}"
+								th:errors="*{numContacto}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="precio" class="col-form-label">Precio del
+								producto</label> <input type="number" th:field="*{precio}"
+								class="form-control" id="precio" placeholder="$"
+								required="required"> <span
+								th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"
+								class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="validationTooltip04">Municipio</label> <select
+								th:field="*{municipio.id}" class="custom-select"
+								id="validationTooltip04">
+								<option th:each="municipio : ${municipios}"
+									th:value="${municipio.id}" th:text="${municipio.nombre}"
+									th:selected="false" />
+							</select> <span th:if="${#fields.hasErrors('municipio.id')}"
+								th:errors="*{municipio.id}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="validationTooltip04">SubCategoria</label> <select
+								th:field="*{subcategoria.idSubCategoria}" class="custom-select"
+								id="validationTooltip04">
+								<option th:each="subcategoria : ${subcategorias}"
+									th:value="${subcategoria.idSubCategoria}"
+									th:text="${subcategoria.nombre}" th:selected="false" />
+							</select> <span
+								th:if="${#fields.hasErrors('subcategoria.idSubCategoria')}"
+								th:errors="*{subcategoria.idSubCategoria}" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							 <input type="file" class="form-control-file"
+								id="exampleFormControlFile1" name="files" multiple>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mt-5">
+							<input type="submit" class="btn btn-primary"
+								value="Update Producto">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+</body>
 </html>
