@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import co.com.eam.avanzada.domain.Subcategoria;
+import co.com.eam.avanzada.domain.Usuario;
 import co.com.eam.avanzada.domain.Categoria;
 import co.com.eam.avanzada.repository.ICategoriaRepository;
 import co.com.eam.avanzada.repository.ISubcategoriaRepository;
@@ -78,10 +79,12 @@ public class SubCategoriaController {
         return "lista-subCategoria";
     }
     
-    //metodo Para Ver El Listado---------------------------------------------
-    @GetMapping("/listasubcategoria")
-    public String listSubCategoria(Subcategoria subcategoria, Model model) {
-        model.addAttribute("subcategorias", subCategoriaRepository.findAll());
-        return "lista-subCategoria";
-    }
+    
+    // Listado de subCategorias  ---------------------------------------------
+ 	@GetMapping("/listasubca")
+ 	public String list(Subcategoria subcategoria, Model model) {
+ 		model.addAttribute("subcategorias", subCategoriaRepository.findAll());
+ 		return "lista-subCategoria";
+ 		
+ 	}
 }

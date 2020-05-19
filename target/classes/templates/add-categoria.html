@@ -14,15 +14,30 @@
 	        <a class="navbar-brand" href="#">OLX</a>
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item">
-	                    <a class="nav-link" href="#">Gestion Categorias</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/singsubcategoria">Gestion SubCategorias</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/singusuario">Gestion Usuario</a>
-	                </li>
+	                <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          Categoria
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="/#">Gestion Categorias</a>
+				          <a class="dropdown-item" href="/listacat">Lista de Categorias</a>
+				    </li>
+	                <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          Subcategoria
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="/singsubcategoria">Gestion SubCategorias</a>
+				          <a class="dropdown-item" href="/listasubca">Lista de SubCategorias</a>
+				    </li>
+	                <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          Usuarios
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="/singusuario">Gestion Usuario</a>
+				          <a class="dropdown-item" href="/listauser">Lista de Usuarios</a>
+				    </li>
 	                <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				          Productos
@@ -34,6 +49,9 @@
 							href="/listapro">Listado de Productos</a>
 				        </div>
 				    </li>
+				    <li class="nav-item">
+	                    <a class="nav-link" href="nuevo-chat">Gestion Chat</a>
+	                </li>
 	            </ul>
 	        </div>
 	    </nav>

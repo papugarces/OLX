@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import co.com.eam.avanzada.domain.Producto;
 import co.com.eam.avanzada.domain.Usuario;
 import co.com.eam.avanzada.domain.UsuarioPK;
 import co.com.eam.avanzada.repository.IUsuarioRepository;
@@ -78,5 +79,13 @@ public class UsuarioController {
         model.addAttribute("usuarios", iUsuarioRepository.findAll());
         return "lista-user";
     }
+    
+ // Listado de Usuarios  ---------------------------------------------
+ 	@GetMapping("/listauser")
+ 	public String list(Usuario usuario, Model model) {
+ 		model.addAttribute("usuarios", iUsuarioRepository.findAll());
+ 		return "lista-user";
+ 		
+ 	}
 
 }
