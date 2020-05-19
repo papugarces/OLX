@@ -44,7 +44,7 @@
 			<div class="col-md-6">
 				<form action="#"
 					th:action="@{/updateproducto/{idProducto}(idProducto=${producto.idProducto})}"
-					th:object="${producto}" method="post">
+					th:object="${producto}" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="titulo" class="col-form-label">Titulo</label> <input
