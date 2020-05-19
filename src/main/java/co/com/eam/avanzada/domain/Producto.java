@@ -26,7 +26,7 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idProducto;
 	
-	@NotBlank(message = "El campo descripción es obligatorio")
+	//@NotBlank(message = "El campo descripción es obligatorio")
 	private String descripcion;
 
 	@NotBlank(message = "El campo dirección es obligatorio")

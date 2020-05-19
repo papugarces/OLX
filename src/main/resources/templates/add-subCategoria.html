@@ -52,9 +52,7 @@
                         			<option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
                         			th:text="${categoria.nombre}" th:selected="false"/>
                     			</select>
-                    			<div class="invalid-tooltip">
-                        			Por favor seleccione una categoria
-                    			</div>
+                    			<span th:if="${#fields.hasErrors('categoria.idCategoria')}" th:errors="*{categoria.idCategoria}" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row">

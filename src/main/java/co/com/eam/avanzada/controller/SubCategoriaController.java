@@ -53,6 +53,7 @@ public class SubCategoriaController {
     public String showUpdateForm(@PathVariable("idSubCategoria") int idSubCategoria, Model model) {
     	Subcategoria subcategoria = subCategoriaRepository.findById(idSubCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido SubCategoria idSubCategoria:" + idSubCategoria));
         model.addAttribute("subcategoria", subcategoria);
+        model.addAttribute("categorias", categoriaRepository.findAll());
         return "update-subCategoria";
     }
     

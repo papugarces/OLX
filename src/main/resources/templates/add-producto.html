@@ -39,7 +39,7 @@
             <h2 class="mb-5">New Producto</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <form action="#" th:action="@{/addproducto}" th:object="${producto}" method="post">
+                    <form action="#" th:action="@{/addproducto}" th:object="${producto}" method="post" name="registro">
                         <div class="row">
                         	<div class="form-group col-md-6">
                                 <label for="titulo" class="col-form-label">Titulo</label>
@@ -48,7 +48,7 @@
                             </div>    
                             <div class="form-group col-md-6">
                                 <label for="descripcion" class="col-form-label">Descripcion</label>
-                                <input type="textarea" th:field="*{descripcion}" class="form-control" id="descripcion" placeholder="..." required="required">
+                                <input type="text" th:field="*{descripcion}" class="form-control" id="descripcion" >
                                 <span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
@@ -58,22 +58,35 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="estado" class="col-form-label">Estado</label>
-                                <input type="text" th:field="*{estado}" class="form-control" id="estado" placeholder="..." required="required">
-                                <span th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="text-danger"></span>
+                                <select th:field="*{estado}" class="custom-select" id="validationTooltip04"  >
+                        			<option th:value="${true}" >Activo</option>
+                        			<option th:value="${false}" th:selected="false">Inactivo</option>
+                    			</select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="dni" class="col-form-label">Cedula del usuario</label>
-                                <input type="number" th:field="*{usuario.id.dni}" class="form-control" id="dni" placeholder="#" required="required">
-                                <span th:if="${#fields.hasErrors('usuario.id.dni')}" th:errors="*{usuario.id.dni}" class="text-danger"></span>
+                                <label for="fechaPublicacion" class="col-form-label">Fecha de Publicacion</label>
+                                <input type="text" th:field="*{fechaPublicacion}" class="form-control" id="fechaPublicacion" placeholder="DD/MM/YYYY" required="required">
+                                <span th:if="${#fields.hasErrors('fechaPublicacion')}" th:errors="*{fechaPublicacion}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="correoContacto" class="col-form-label">Correo Del Usuario</label>
-                                <input type="email" th:field="*{usuario.id.correo}" class="form-control" id="correoContacto" placeholder="ejemplo@gma.com" required="required">
-                                <span th:if="${#fields.hasErrors('usuario.id.correo')}" th:errors="*{usuario.id.correo}" class="text-danger"></span>
-                            </div>
+                            	<label for="validationTooltip04">Usuario</label>
+                      			<select th:field="*{usuario.id.dni}" class="custom-select" id="validationTooltip04" >
+                        			<option th:each="usuario : ${usuarios}" th:value="${usuario.id.dni}"
+                        			th:text="${usuario.nombre}+' '+${usuario.apellido}"/>
+                    			</select>
+                    			<span th:if="${#fields.hasErrors('usuario.id.dni')}" th:errors="*{usuario.id.dni}" class="text-danger"></span>
+                    		</div>
+                    		<div class="form-group col-md-6">
+                            	<label for="validationTooltip04">Correo</label>
+                      			<select th:field="*{usuario.id.correo}" class="custom-select" id="validationTooltip04" >
+                        			<option th:each="usuario : ${usuarios}" th:value="${usuario.id.correo}"
+                        			th:text="${usuario.id.correo}"/>
+                    			</select>
+                    			<span th:if="${#fields.hasErrors('usuario.id.correo')}" th:errors="*{usuario.id.correo}" class="text-danger"></span>
+                    		</div>
                             <div class="form-group col-md-6">
                                 <label for="numContacto" class="col-form-label">Numero de contacto</label>
-                                <input type="number" th:field="*{numContacto}" class="form-control" id="numContacto" placeholder="#" required="required">
+                                <input type="number" th:field="*{numContacto}" class="form-control" id="numContacto" placeholder="#"  required="required">
                                 <span th:if="${#fields.hasErrors('numContacto')}" th:errors="*{numContacto}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
@@ -81,17 +94,22 @@
                                 <input type="number" th:field="*{precio}" class="form-control" id="precio" placeholder="$" required="required">
                                 <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="text-danger"></span>
                             </div>
-                            
                             <div class="form-group col-md-6">
-                                <label for="IdUbicacion" class="col-form-label">Id del Municipio</label>
-                                <input type="number" th:field="*{municipio.id}" class="form-control" id="IdUbicacion" placeholder="" required="required">
-                                <span th:if="${#fields.hasErrors('usuario.id')}" th:errors="*{usuario.id}" class="text-danger"></span>
+                            	<label for="validationTooltip04">Municipio</label>
+                      			<select th:field="*{municipio.id}" class="custom-select" id="validationTooltip04"  >
+                        			<option th:each="municipio : ${municipios}" th:value="${municipio.id}"
+                        			th:text="${municipio.nombre}" th:selected="false"/>
+                    			</select>
+                    			<span th:if="${#fields.hasErrors('municipio.id')}" th:errors="*{municipio.id}" class="text-danger"></span>
                             </div>
                             
                            	<div class="form-group col-md-6">
-                                <label for="idSubCategoria" class="col-form-label">Id De la SubCategoria</label>
-                                <input type="number" th:field="*{subcategoria.idSubCategoria}" class="form-control" id="idSubCategoria" placeholder="#">
-                                <span th:if="${#fields.hasErrors('subcategoria.idSubCategoria')}" th:errors="*{subcategoria.idSubCategoria}" class="text-danger" required="required"></span>
+                           		<label for="validationTooltip04">SubCategoria</label>
+                      			<select th:field="*{subcategoria.idSubCategoria}" class="custom-select" id="validationTooltip04"  >
+                        			<option th:each="subcategoria : ${subcategorias}" th:value="${subcategoria.idSubCategoria}"
+                        			th:text="${subcategoria.nombre}" th:selected="false"/>
+                    			</select>
+                    			<span th:if="${#fields.hasErrors('subcategoria.idSubCategoria')}" th:errors="*{subcategoria.idSubCategoria}" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -103,7 +121,6 @@
                 </div>
             </div>
         </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
