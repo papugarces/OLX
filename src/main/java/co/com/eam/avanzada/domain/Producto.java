@@ -33,7 +33,7 @@ public class Producto implements Serializable {
 	@NotBlank(message = "El campo dirección es obligatorio")
 	private String direccion;
 	
-	@NotNull(message = "El campo estado es obligatorio")
+	@NotBlank(message = "El campo estado es obligatorio")
 	private boolean estado;
 
 	@NotNull(message = "Por favor diligencia bien el campo fecha (DD/MM/YYYY)")
@@ -44,7 +44,7 @@ public class Producto implements Serializable {
 	private String numContacto;
 
 
-	@NotNull(message = "El campo precio es obligatorio")
+	@NotBlank(message = "El campo precio es obligatorio")
 	@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private double precio;
 
