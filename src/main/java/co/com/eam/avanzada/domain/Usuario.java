@@ -27,6 +27,7 @@ public class Usuario implements Serializable {
 	private UsuarioPK id;
 
 	@NotBlank(message = "El campo apellido es obligatorio")
+	@Pattern(regexp="^[a-zA-Z ]*$", message="este nombre no es valido")
 	private String apellido;
 	
 	@NotBlank(message = "El campo clave es obligatorio")
@@ -42,10 +43,11 @@ public class Usuario implements Serializable {
 	private Date fechaNacimiento;
 
 	@NotBlank(message = "El campo nombre es obligatorio")
-	@Pattern(regexp="^[a-zA-Z ]*$", message="este no es un email valido")
+	@Pattern(regexp="^[a-zA-Z ]*$", message="este nombre no es valido")
 	private String nombre;
 
 	@NotBlank(message = "El campo teléfono es obligatorio")
+	@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private String telefono;
 
 	//bi-directional many-to-one association to Producto

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 
@@ -39,10 +40,12 @@ public class Producto implements Serializable {
 	private Date fechaPublicacion;
 
 	@NotBlank(message = "El campo teléfono de contácto es obligatorio")
+	@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private String numContacto;
 
-	//@NotBlank(message = "El campo precio es obligatorio")
+
 	@NotNull(message = "El campo precio es obligatorio")
+	@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private double precio;
 
 	@NotBlank(message = "El campo título es obligatorio")

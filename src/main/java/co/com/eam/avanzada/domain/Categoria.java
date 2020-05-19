@@ -3,6 +3,7 @@ package co.com.eam.avanzada.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class Categoria implements Serializable {
 	private int idCategoria;
 
 	@NotBlank(message = "El campo nombre es obligatorio")
+	@Pattern(regexp="^[a-zA-Z ]*$", message="este nombre no es valido")
 	private String nombre;
 
 	//bi-directional many-to-one association to Subcategoria
