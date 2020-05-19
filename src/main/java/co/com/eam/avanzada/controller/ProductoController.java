@@ -95,12 +95,11 @@ public class ProductoController {
 			Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
 			fileNames.append(file.getOriginalFilename() + " ");
 			
-			img.setProducto(producto);
-			img.setUrl(fileNameAndPath.toString());
-			iImagenRepository.save(img);
-			
 			try {
 				Files.write(fileNameAndPath, file.getBytes());
+				img.setProducto(producto);
+				img.setUrl(fileNameAndPath.toString());
+				iImagenRepository.save(img);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
