@@ -43,12 +43,12 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="nombre" class="col-form-label">Nombre de la SubCategoria</label>
-                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="nombre">
+                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="nombre" required="required">
                                 <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="idCategoria" class="col-form-label">Id De La Categoria</label>
-                                <input type="text" th:field="*{categoria.idCategoria}" class="form-control" id="idCategoria" placeholder="...">
+                                <input type="text" th:field="*{categoria.idCategoria}" class="form-control" id="idCategoria" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('categoria.idCategoria')}" th:errors="*{categoria.idCategoria}" class="text-danger"></span>
                             </div>
                         </div>

@@ -41,59 +41,61 @@
                 <div class="col-md-6">
                     <form action="#" th:action="@{/updateproducto/{idProducto}(idProducto=${producto.idProducto})}" th:object="${producto}" method="post">
                         <div class="row">
+                        	<div class="form-group col-md-6">
+                                <label for="titulo" class="col-form-label">Titulo</label>
+                                <input type="text" th:field="*{titulo}" class="form-control" id="titulo" placeholder="titulo" required="required">
+                                <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="text-danger"></span>
+                            </div>
                             <div class="form-group col-md-6">
                                 <label for="descripcion" class="col-form-label">Descripcion</label>
-                                <input type="textarea" th:field="*{descripcion}" class="form-control" id="descripcion" placeholder="...">
+                                <input type="textarea" th:field="*{descripcion}" class="form-control" id="descripcion" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="direccion" class="col-form-label">Direccion</label>
-                                <input type="text" th:field="*{direccion}" class="form-control" id="direccion" placeholder="...">
+                                <input type="text" th:field="*{direccion}" class="form-control" id="direccion" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="estado" class="col-form-label">Estado</label>
-                                <input type="text" th:field="*{estado}" class="form-control" id="estado" placeholder="...">
+                                <input type="text" th:field="*{estado}" class="form-control" id="estado" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="fechaPublicacion" class="col-form-label">Fecha de Publicacion</label>
-                                <input type="text" th:field="*{fechaPublicacion}" class="form-control" id="fechaPublicacion" placeholder="DD/MM/YYYY">
+                                <input type="text" th:field="*{fechaPublicacion}" class="form-control" id="fechaPublicacion" placeholder="DD/MM/YYYY" required="required">
                                 <span th:if="${#fields.hasErrors('fechaPublicacion')}" th:errors="*{fechaPublicacion}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="numContacto" class="col-form-label">Numero de contacto</label>
-                                <input type="number" th:field="*{numContacto}" class="form-control" id="numContacto" placeholder="#">
-                                <span th:if="${#fields.hasErrors('numContacto')}" th:errors="*{numContacto}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="precio" class="col-form-label">Precio del producto</label>
-                                <input type="number" th:field="*{precio}" class="form-control" id="precio" placeholder="$">
-                                <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="titulo" class="col-form-label">Titulo</label>
-                                <input type="text" th:field="*{titulo}" class="form-control" id="titulo" placeholder="titulo">
-                                <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="IdUbicacion" class="col-form-label">Id del Municipio</label>
-                                <input type="number" th:field="*{municipio.id}" class="form-control" id="IdUbicacion" placeholder="">
-                                <span th:if="${#fields.hasErrors('usuario.id')}" th:errors="*{usuario.id}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
                                 <label for="dni" class="col-form-label">Cedula del usuario</label>
-                                <input type="number" th:field="*{usuario.id.dni}" class="form-control" id="dni" placeholder="#">
+                                <input type="number" th:field="*{usuario.id.dni}" class="form-control" id="dni" placeholder="#" required="required">
                                 <span th:if="${#fields.hasErrors('usuario.id.dni')}" th:errors="*{usuario.id.dni}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="correoContacto" class="col-form-label">Correo Del Usuario</label>
-                                <input type="email" th:field="*{usuario.id.correo}" class="form-control" id="correoContacto" placeholder="ejemplo@gma.com">
+                                <input type="email" th:field="*{usuario.id.correo}" class="form-control" id="correoContacto" placeholder="ejemplo@gma.com" required="required">
                                 <span th:if="${#fields.hasErrors('usuario.id.correo')}" th:errors="*{usuario.id.correo}" class="text-danger"></span>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="numContacto" class="col-form-label">Numero de contacto</label>
+                                <input type="number" th:field="*{numContacto}" class="form-control" id="numContacto" placeholder="#" required="required">
+                                <span th:if="${#fields.hasErrors('numContacto')}" th:errors="*{numContacto}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="precio" class="col-form-label">Precio del producto</label>
+                                <input type="number" th:field="*{precio}" class="form-control" id="precio" placeholder="$" required="required">
+                                <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label for="IdUbicacion" class="col-form-label">Id del Municipio</label>
+                                <input type="number" th:field="*{municipio.id}" class="form-control" id="IdUbicacion" placeholder="" required="required">
+                                <span th:if="${#fields.hasErrors('usuario.id')}" th:errors="*{usuario.id}" class="text-danger"></span>
+                            </div>
+                            
                            	<div class="form-group col-md-6">
                                 <label for="idSubCategoria" class="col-form-label">Id De la SubCategoria</label>
-                                <input type="number" th:field="*{subcategoria.idSubCategoria}" class="form-control" id="idSubCategoria" placeholder="#">
+                                <input type="number" th:field="*{subcategoria.idSubCategoria}" class="form-control" id="idSubCategoria" placeholder="#" required="required">
                                 <span th:if="${#fields.hasErrors('subcategoria.idSubCategoria')}" th:errors="*{subcategoria.idSubCategoria}" class="text-danger"></span>
                             </div>
                         </div>

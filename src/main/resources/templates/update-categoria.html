@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="nombre" class="col-form-label">Nombre de Categoria</label>
-                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="nombre">
+                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="nombre" required="required">
                                 <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
                             </div>
                         </div>

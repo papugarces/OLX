@@ -3,6 +3,8 @@ package co.com.eam.avanzada.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -28,6 +30,7 @@ public class Usuario implements Serializable {
 	private String apellido;
 	
 	@NotBlank(message = "El campo clave es obligatorio")
+	@Size(min= 8, max=200, message="debe de tener minimo 8 caracteres")
 	private String password;
 
 	@NotBlank(message = "El campo dirección es obligatorio")
@@ -38,6 +41,7 @@ public class Usuario implements Serializable {
 	private Date fechaNacimiento;
 
 	@NotBlank(message = "El campo nombre es obligatorio")
+	@Pattern(regexp="^[a-zA-Z ]*$", message="este no es un email valido")
 	private String nombre;
 
 	@NotBlank(message = "El campo teléfono es obligatorio")

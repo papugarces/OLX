@@ -39,11 +39,11 @@
     <h2 class="mb-5">New Chat</h2>
     <div class="row">
         <div class="col-md-6">
-            <form action="#" th:action="@{/addchat}" method="post">
-                <div class="row" th:object="${user1}">
+            <form action="#" th:action="@{/addchat}" method="post" th:object="${user1}" th:object="${user2}">
+                <div class="row">
                     <div class="col-5">
                       <label for="validationTooltip04">Cliente</label>
-                      <select class="custom-select" id="validationTooltip04" th:field="*{dni}" required>
+                      <select class="custom-select" id="validationTooltip04" th:field="*{dni}" >
                         <option selected disabled value="">Seleccionar..</option>
                         <option th:each="usuario : ${usuarios}" th:value="${usuario.id.dni}"
                         th:text="${usuario.nombre}+' '+${usuario.apellido}" th:selected="false"></option>
@@ -57,7 +57,7 @@
                          <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="row" th:object="${user2}">
+                <div class="row" >
                     <div class="col-5">
                       <label for="validationTooltip04">Ofertador</label>
                       <select class="custom-select" id="validationTooltip04" required>
