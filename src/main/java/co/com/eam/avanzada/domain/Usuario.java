@@ -38,6 +38,7 @@ public class Usuario implements Serializable {
 
 	
 	@Column(name="fecha_nacimiento")
+	@NotBlank(message = "Por favor dilegencie bien el campo DD/MM/YYYY")
 	private Date fechaNacimiento;
 
 	@NotBlank(message = "El campo nombre es obligatorio")
