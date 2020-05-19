@@ -1,6 +1,7 @@
 package co.com.eam.avanzada.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -47,13 +48,67 @@ public class MensajeController {
         return "add-chat";
     }
     
+    @GetMapping("/nuevo-chat")
+    public String comenzarChat(Model model) {
+    	
+    	Chat chat = new Chat();
+    	List<Usuario> listaUsuarios = (List<Usuario>) usuarioRepository.findAll();
+    	
+    	model.addAttribute("chat", chat);
+    	model.addAttribute("usuarios",listaUsuarios);
+    	
+    	return "crear-chat";
+    }
+    
+    @PostMapping("/crearchat")
+    public String crearChat(@Valid Chat chat, BindingResult result, Model model) {
+    	
+    	System.out.println("idChat"+chat.getIdChat());
+    	System.out.println("idChat"+chat.getUsuario1().getId().getDni());
+    	System.out.println("idChat"+chat.getUsuario1().getId().getCorreo());
+    	System.out.println("idChat"+chat.getUsuario2().getId().getDni());
+    	System.out.println("idChat"+chat.getUsuario2().getId().getCorreo());
+    	
+    	if (result.hasErrors()) {
+    		Usuario cliente = usuarioRepository.findById(chat.getUsuario1().getId()).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + chat.getUsuario1().getId().getCorreo()));
+        	Usuario ofertador = usuarioRepository.findById(chat.getUsuario2().getId()).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + chat.getUsuario2().getId().getCorreo()));
+        	
+        	chat.setUsuario1(cliente);
+        	chat.setUsuario2(ofertador);
+        	return "crear-chat";
+        	
+    	}
+    	
+    	
+    	chatRepository.save(chat);
+    	model.addAttribute("chat", chat);
+    	model.addAttribute("mensajes",mensajeRepository.cargarMensajes(chat.getUsuario1().getId().getDni(), chat.getUsuario2().getId().getDni()));
+    	
+    	return "chat";
+    }
+    /*
+    @PostMapping("/enviarmensaje")
+    public String enviarMensaje(@Valid Chat chat, @Valid String texto, @Valid Usuario remitente, BindingResult result, Model model) {
+        
+    	MensajePK idMensaje = new MensajePK();
+    	idMensaje.setChat(chat);
+    	
+    	Mensaje mensaje = new Mensaje();
+    	mensaje.setId(idMensaje);
+    	mensaje.setTexto(texto);
+    	mensaje.setUsuario(remitente);
+    	model.addAttribute("mensaje", mensaje);
+        return "chat";
+    }
+    */
+    
     @PostMapping("/addchat")
     public String addChat(@Valid UsuarioPK user1,@Valid UsuarioPK user2, BindingResult result, Model model) {
     	Chat chat = new Chat();
     	Mensaje mensaje = new Mensaje();
     	if (result.hasErrors()) {
-        	Usuario cliente = usuarioRepository.findById(user1).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario id:" + user1));
-        	Usuario ofertador = usuarioRepository.findById(user2).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario id:" + user1));
+        	Usuario cliente = usuarioRepository.findById(user1).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + user1.getCorreo()));
+        	Usuario ofertador = usuarioRepository.findById(user2).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + user2.getCorreo()));
         	
         	chat.setUsuario1(cliente);
         	chat.setUsuario2(ofertador);
@@ -77,22 +132,23 @@ public class MensajeController {
         return "add-mensaje";
     }
     
-    @PostMapping("/cargarmensaje")
-    public String addMensaje(@Valid Mensaje msn, BindingResult result, Model model) {
-    	Chat chat = new Chat();
+    @PostMapping("/enviarmensaje")
+    public String addMensaje(@Valid Mensaje nuevomensaje, BindingResult result, Model model) {
+    	
     	Mensaje mensaje = new Mensaje();
     	if (result.hasErrors()) {
     		MensajePK idMensaje = new MensajePK();
-    		idMensaje.setChat(msn.getId().getChat());
+    		idMensaje.setChat(nuevomensaje.getId().getChat());
         	mensaje.setId(idMensaje);
-        	mensaje.setFechaEnvio(msn.getFechaEnvio());
-        	mensaje.setTexto(msn.getTexto());
-        	mensaje.setUsuario(msn.getUsuario());
+        	mensaje.setFechaEnvio(nuevomensaje.getFechaEnvio());
+        	mensaje.setTexto(nuevomensaje.getTexto());
+        	mensaje.setUsuario(nuevomensaje.getUsuario());
             return "add-mensaje";
         }
 
-        mensajeRepository.save(mensaje);
-        model.addAttribute("mensaje", mensajeRepository.cargarMensajes(mensaje.getUsuario().getId().getDni(),mensaje.getId().getChat().getUsuario2().getId().getDni()));
+        mensajeRepository.save(nuevomensaje);
+        model.addAttribute("mensajes",mensajeRepository.cargarMensajes(mensaje.getId().getChat().getUsuario1().getId().getDni(), mensaje.getId().getChat().getUsuario2().getId().getDni()));
+        //model.addAttribute("mensaje", mensajeRepository.cargarMensajes(mensaje.getUsuario().getId().getDni(),mensaje.getId().getChat().getUsuario2().getId().getDni()));
         return "add-mensaje";
     }
   

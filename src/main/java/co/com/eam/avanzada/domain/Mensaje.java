@@ -27,7 +27,7 @@ public class Mensaje implements Serializable {
 	private Date fechaEnvio;
 
 	
-	//@NotBlank(message = "Escribe un mensaje para poder enviarlo")
+	@NotBlank(message = "Escribe un mensaje para poder enviarlo")
 	private String texto;
 
 
