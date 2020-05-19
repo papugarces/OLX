@@ -33,7 +33,9 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" href="/singproducto">Gestion Producto</a>
 						<a class="dropdown-item" href="/productos-disponibles">Productos
-							Disponibles</a>
+							Disponibles</a> 
+						<a class="dropdown-item"
+							href="/listapro">Listado de Productos</a>
 					</div></li>
 			</ul>
 		</div>
@@ -71,17 +73,9 @@
 							<label for="estado" class="col-form-label">Estado</label> <select
 								th:field="*{estado}" class="custom-select"
 								id="validationTooltip04">
-								<option th:value="${true}">Activo</option>
-								<option th:value="${false}" th:selected="false">Inactivo</option>
+								<option th:value="${true}" th:text="Activo"></option>
+								<option th:value="${false}" th:text="Inactivo" th:selected="false"></option>
 							</select>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="fechaPublicacion" class="col-form-label">Fecha
-								de Publicacion</label> <input type="text" th:field="*{fechaPublicacion}"
-								class="form-control" id="fechaPublicacion"
-								placeholder="DD/MM/YYYY" required="required"> <span
-								th:if="${#fields.hasErrors('fechaPublicacion')}"
-								th:errors="*{fechaPublicacion}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="validationTooltip04">Usuario</label> <select
@@ -141,7 +135,7 @@
 								th:errors="*{subcategoria.idSubCategoria}" class="text-danger"></span>
 						</div>
 						<div class="form-group">
-							 <input type="file" class="form-control-file"
+							<input type="file" class="form-control-file"
 								id="exampleFormControlFile1" name="files" multiple>
 						</div>
 					</div>

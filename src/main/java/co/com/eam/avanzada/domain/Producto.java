@@ -35,7 +35,7 @@ public class Producto implements Serializable {
 	@NotNull(message = "El campo estado es obligatorio")
 	private boolean estado;
 
-	//@NotNull(message = "El campo fecha de publicación es obligatorio")
+	@NotNull(message = "Por favor diligencia bien el campo fecha (DD/MM/YYYY)")
 	private Date fechaPublicacion;
 
 	@NotBlank(message = "El campo teléfono de contácto es obligatorio")
