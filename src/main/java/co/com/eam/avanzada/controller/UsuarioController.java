@@ -18,11 +18,11 @@ import co.com.eam.avanzada.repository.IUsuarioRepository;
 @Controller
 public class UsuarioController {
 
-	private final IUsuarioRepository iUsuarioRepository;
+	private final IUsuarioRepository IusuarioRepository;
 
 	@Autowired
-	public UsuarioController(IUsuarioRepository iUsuarioRepository) {
-		this.iUsuarioRepository = iUsuarioRepository;
+	public UsuarioController(IUsuarioRepository IusuarioRepository) {
+		this.IusuarioRepository = IusuarioRepository;
 	}
 	
 	//metodo Agregar---------------------------------------------
@@ -37,8 +37,8 @@ public class UsuarioController {
             return "add-user";
         }
 
-        iUsuarioRepository.save(usuario);
-        model.addAttribute("usuarios", iUsuarioRepository.findAll());
+        IusuarioRepository.save(usuario);
+        model.addAttribute("usuarios", IusuarioRepository.findAll());
         return "lista-user";
     }
     
@@ -48,7 +48,7 @@ public class UsuarioController {
     	UsuarioPK primary = new UsuarioPK();
     	primary.setDni(id);
     	primary.setCorreo(correo);
-    	Usuario usuario = iUsuarioRepository.findById(primary).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
+    	Usuario usuario = IusuarioRepository.findById(primary).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
         model.addAttribute("usuario", usuario);
         return "update-user";
     }
@@ -63,8 +63,8 @@ public class UsuarioController {
             return "update-user";
         }
         
-        iUsuarioRepository.save(usuario);
-        model.addAttribute("usuarios", iUsuarioRepository.findAll());
+    	IusuarioRepository.save(usuario);
+        model.addAttribute("usuarios", IusuarioRepository.findAll());
         return "lista-user";
     }
     
@@ -74,16 +74,16 @@ public class UsuarioController {
     	UsuarioPK primary = new UsuarioPK();
     	primary.setDni(id);
     	primary.setCorreo(correo);
-    	Usuario usuario = iUsuarioRepository.findById(primary).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
-    	iUsuarioRepository.delete(usuario);
-        model.addAttribute("usuarios", iUsuarioRepository.findAll());
+    	Usuario usuario = IusuarioRepository.findById(primary).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
+    	IusuarioRepository.delete(usuario);
+        model.addAttribute("usuarios", IusuarioRepository.findAll());
         return "lista-user";
     }
     
  // Listado de Usuarios  ---------------------------------------------
  	@GetMapping("/listauser")
  	public String list(Usuario usuario, Model model) {
- 		model.addAttribute("usuarios", iUsuarioRepository.findAll());
+ 		model.addAttribute("usuarios", IusuarioRepository.findAll());
  		return "lista-user";
  		
  	}

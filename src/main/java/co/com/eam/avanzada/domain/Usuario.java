@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
 
 	
 	@Column(name="fecha_nacimiento")
-	@NotBlank(message = "Por favor dilegencie bien el campo DD/MM/YYYY")
+	//@NotBlank(message = "Por favor dilegencie bien el campo DD/MM/YYYY")
 	private Date fechaNacimiento;
 
 	@NotBlank(message = "El campo nombre es obligatorio")
@@ -48,7 +48,7 @@ public class Usuario implements Serializable {
 	private String nombre;
 
 	@NotBlank(message = "El campo teléfono es obligatorio")
-	@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
+	//@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private String telefono;
 
 	//bi-directional many-to-one association to Producto
