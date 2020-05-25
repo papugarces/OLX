@@ -24,9 +24,16 @@ import java.util.List;
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private UsuarioPK id;
 
+	@Id
+	@NotNull(message = "El campo correo es obligatorio")
+	@Pattern(regexp="^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$", message="este no es un email valido")
+	private String correo;
+	
+	@NotBlank(message = "El campo cédula es obligatorio")
+	@Size(min= 8, max=200, message="debe de tener minimo 8 caracteres")
+	private String dni;
+	
 	@NotBlank(message = "El campo apellido es obligatorio")
 	@Pattern(regexp="^[a-zA-Z ]*$", message="este nombre no es valido")
 	private String apellido;
@@ -38,7 +45,6 @@ public class Usuario implements Serializable {
 	@NotBlank(message = "El campo dirección es obligatorio")
 	private String direccion;
 
-	
 	@Column(name="fecha_nacimiento")
 	//@NotBlank(message = "Por favor dilegencie bien el campo DD/MM/YYYY")
 	private Date fechaNacimiento;
