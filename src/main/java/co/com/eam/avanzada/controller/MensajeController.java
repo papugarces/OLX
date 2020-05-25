@@ -18,7 +18,6 @@ import co.com.eam.avanzada.domain.Chat;
 import co.com.eam.avanzada.domain.Mensaje;
 import co.com.eam.avanzada.domain.MensajePK;
 import co.com.eam.avanzada.domain.Usuario;
-import co.com.eam.avanzada.domain.UsuarioPK;
 import co.com.eam.avanzada.repository.IChatRepository;
 import co.com.eam.avanzada.repository.IMensajeRepository;
 import co.com.eam.avanzada.repository.IUsuarioRepository;
@@ -43,7 +42,7 @@ public class MensajeController {
      
     //metodo Agregar---------------------------------------------
     @GetMapping("/singnchat")
-    public String showSignUpForm(UsuarioPK user1,UsuarioPK user2,Model model) {
+    public String showSignUpForm(String correoUser1,String correoUser2,Model model) {
     	model.addAttribute("usuarios", usuarioRepository.findAll());
         return "add-chat";
     }
@@ -64,14 +63,14 @@ public class MensajeController {
     public String crearChat(@Valid Chat chat, BindingResult result, Model model) {
     	
     	System.out.println("idChat"+chat.getIdChat());
-    	System.out.println("idChat"+chat.getUsuario1().getId().getDni());
-    	System.out.println("idChat"+chat.getUsuario1().getId().getCorreo());
-    	System.out.println("idChat"+chat.getUsuario2().getId().getDni());
-    	System.out.println("idChat"+chat.getUsuario2().getId().getCorreo());
+    	System.out.println("idChat"+chat.getUsuario1().getDni());
+    	System.out.println("idChat"+chat.getUsuario1().getCorreo());
+    	System.out.println("idChat"+chat.getUsuario2().getDni());
+    	System.out.println("idChat"+chat.getUsuario2().getCorreo());
     	
     	if (result.hasErrors()) {
-    		Usuario cliente = usuarioRepository.findById(chat.getUsuario1().getId()).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + chat.getUsuario1().getId().getCorreo()));
-        	Usuario ofertador = usuarioRepository.findById(chat.getUsuario2().getId()).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + chat.getUsuario2().getId().getCorreo()));
+    		Usuario cliente = usuarioRepository.findById(chat.getUsuario1().getCorreo()).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + chat.getUsuario1().getCorreo()));
+        	Usuario ofertador = usuarioRepository.findById(chat.getUsuario2().getCorreo()).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + chat.getUsuario2().getCorreo()));
         	
         	chat.setUsuario1(cliente);
         	chat.setUsuario2(ofertador);
@@ -82,7 +81,7 @@ public class MensajeController {
     	
     	chatRepository.save(chat);
     	model.addAttribute("chat", chat);
-    	model.addAttribute("mensajes",mensajeRepository.cargarMensajes(chat.getUsuario1().getId().getDni(), chat.getUsuario2().getId().getDni()));
+    	model.addAttribute("mensajes",mensajeRepository.cargarMensajes(chat.getUsuario1().getDni(), chat.getUsuario2().getDni()));
     	
     	return "chat";
     }
@@ -103,12 +102,12 @@ public class MensajeController {
     */
     
     @PostMapping("/addchat")
-    public String addChat(@Valid UsuarioPK user1,@Valid UsuarioPK user2, BindingResult result, Model model) {
+    public String addChat(@Valid String user1,@Valid String user2, BindingResult result, Model model) {
     	Chat chat = new Chat();
     	Mensaje mensaje = new Mensaje();
     	if (result.hasErrors()) {
-        	Usuario cliente = usuarioRepository.findById(user1).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + user1.getCorreo()));
-        	Usuario ofertador = usuarioRepository.findById(user2).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + user2.getCorreo()));
+        	Usuario cliente = usuarioRepository.findById(user1).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + user1));
+        	Usuario ofertador = usuarioRepository.findById(user2).orElseThrow(() -> new IllegalArgumentException("Invalido Usuario correo:" + user2));
         	
         	chat.setUsuario1(cliente);
         	chat.setUsuario2(ofertador);
@@ -147,7 +146,7 @@ public class MensajeController {
         }
 
         mensajeRepository.save(nuevomensaje);
-        model.addAttribute("mensajes",mensajeRepository.cargarMensajes(mensaje.getId().getChat().getUsuario1().getId().getDni(), mensaje.getId().getChat().getUsuario2().getId().getDni()));
+        model.addAttribute("mensajes",mensajeRepository.cargarMensajes(mensaje.getId().getChat().getUsuario1().getDni(), mensaje.getId().getChat().getUsuario2().getDni()));
         //model.addAttribute("mensaje", mensajeRepository.cargarMensajes(mensaje.getUsuario().getId().getDni(),mensaje.getId().getChat().getUsuario2().getId().getDni()));
         return "add-mensaje";
     }

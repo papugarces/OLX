@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import co.com.eam.avanzada.domain.Imgproducto;
 import co.com.eam.avanzada.domain.Producto;
-import co.com.eam.avanzada.domain.UsuarioPK;
 import co.com.eam.avanzada.repository.IImgProductoRepository;
 import co.com.eam.avanzada.repository.IMunicipioRepository;
 import co.com.eam.avanzada.repository.IProductoRepository;

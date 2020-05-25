@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import co.com.eam.avanzada.domain.Categoria;
-import co.com.eam.avanzada.domain.Subcategoria;
 import co.com.eam.avanzada.repository.ICategoriaRepository;
 
 

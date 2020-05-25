@@ -1,6 +1,6 @@
 package co.com.eam.avanzada.controller;
 
-import java.util.List;
+
 
 import javax.validation.Valid;
 
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import co.com.eam.avanzada.domain.Subcategoria;
-import co.com.eam.avanzada.domain.Usuario;
-import co.com.eam.avanzada.domain.Categoria;
 import co.com.eam.avanzada.repository.ICategoriaRepository;
 import co.com.eam.avanzada.repository.ISubcategoriaRepository;
 

@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import co.com.eam.avanzada.domain.Producto;
 import co.com.eam.avanzada.domain.Usuario;
-import co.com.eam.avanzada.domain.UsuarioPK;
 import co.com.eam.avanzada.repository.IUsuarioRepository;
 
 @Controller
@@ -45,10 +43,7 @@ public class UsuarioController {
     //metodo Actualizar---------------------------------------------
     @GetMapping("/editusuario/{id}/{correo}")
     public String showUpdateForm(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {
-    	UsuarioPK primary = new UsuarioPK();
-    	primary.setDni(id);
-    	primary.setCorreo(correo);
-    	Usuario usuario = IusuarioRepository.findById(primary).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
+    	Usuario usuario = IusuarioRepository.findById(correo).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
         model.addAttribute("usuario", usuario);
         return "update-user";
     }
@@ -56,10 +51,8 @@ public class UsuarioController {
     @PostMapping("/updateusuario/{id}/{correo}")
     public String updateUsuario(@PathVariable("id") String id,@PathVariable("correo") String correo, @Valid Usuario usuario, BindingResult result, Model model) {
     	if (result.hasErrors()) {
-    		UsuarioPK primary = new UsuarioPK();
-        	primary.setDni(id);
-        	primary.setCorreo(correo);
-        	usuario.setId(primary);
+        	usuario.setDni(id);
+        	usuario.setCorreo(correo);
             return "update-user";
         }
         
@@ -71,10 +64,7 @@ public class UsuarioController {
     //metodo Eliminar---------------------------------------------
     @GetMapping("/deleteusuario/{id}/{correo}")
     public String deleteUsuario(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {
-    	UsuarioPK primary = new UsuarioPK();
-    	primary.setDni(id);
-    	primary.setCorreo(correo);
-    	Usuario usuario = IusuarioRepository.findById(primary).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
+    	Usuario usuario = IusuarioRepository.findById(correo).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
     	IusuarioRepository.delete(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
         return "lista-user";
