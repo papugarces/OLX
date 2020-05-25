@@ -14,7 +14,7 @@ public interface IMensajeRepository extends CrudRepository<Mensaje, MensajePK> {
 	
 	@Query("SELECT ms "
 			+ "FROM Mensaje ms JOIN ms.id.chat c JOIN ms.usuario us "
-			+ "WHERE c.usuario1.id.dni = ?1 AND c.usuario2.id.dni = ?2")
+			+ "WHERE c.usuario1.dni = ?1 AND c.usuario2.dni = ?2")
 	public Iterable<Mensaje> cargarMensajes(String dniCliente, String dniOfertador);
 	
 	
