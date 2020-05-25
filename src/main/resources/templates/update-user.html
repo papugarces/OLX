@@ -59,7 +59,7 @@
             <h2 class="mb-5">Update User</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <form action="#" th:action="@{/updateusuario/{id}/{correo}(id=${usuario.id.dni},correo=${usuario.id.correo})}" th:object="${usuario}" method="post">
+                    <form action="#" th:action="@{/updateusuario/{id}/{correo}(id=${usuario.dni},correo=${usuario.correo})}" th:object="${usuario}" method="post">
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="nombre" class="col-form-label">Nombres</label>

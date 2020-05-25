@@ -76,10 +76,10 @@
                             </thead>
                             <tbody>
                                 <tr th:each="usuario : ${usuarios}">
-                                    <td th:text="${usuario.id.dni}"></td>
+                                    <td th:text="${usuario.dni}"></td>
                                     <td th:text="${usuario.nombre}"></td>
                                     <td th:text="${usuario.apellido}"></td>
-                                    <td th:text="${usuario.id.correo}"></td>
+                                    <td th:text="${usuario.correo}"></td>
                                     <td th:text="${usuario.password}"></td>
                                     <td th:text="${usuario.direccion}"></td>
                                     <td th:text="${#dates.format(usuario.fechaNacimiento, 'dd-MMM-yyyy')}"></td>
@@ -87,8 +87,8 @@
                                     <td th:text="${usuario.telefono}"></td>
                                     
                                     
-                                    <td><a th:href="@{/editusuario/{id}/{correo}(id=${usuario.id.dni}, correo=${usuario.id.correo})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-                                    <td><a th:href="@{/deleteusuario/{id}/{correo}(id=${usuario.id.dni}, correo=${usuario.id.correo})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+                                    <td><a th:href="@{/editusuario/{id}/{correo}(id=${usuario.dni}, correo=${usuario.correo})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                                    <td><a th:href="@{/deleteusuario/{id}/{correo}(id=${usuario.dni}, correo=${usuario.correo})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
