@@ -1,5 +1,10 @@
 package co.com.eam.avanzada.controller;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +35,14 @@ public class UsuarioController {
     }
     
     @PostMapping("/addusuario")
-    public String addUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
+    public String addUsuario(@Valid Usuario usuario, BindingResult result, Model model) throws ParseException {
         if (result.hasErrors()) {
             return "add-user";
         }
+        
+        String entrada = "03/12/2001";
+        DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+        Date fecha = (Date) format.parse(entrada);
 
         IusuarioRepository.save(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
