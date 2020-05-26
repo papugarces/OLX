@@ -56,20 +56,20 @@
 	        </div>
 	    </nav>
         <div class="container my-5">
-            <h2 class="mb-5">Update Categoria</h2>
+            <h2 class="mb-5" th:text="#{update-categoria.title}">Update Categoria</h2>
             <div class="row">
                 <div class="col-md-6">
                     <form action="#" th:action="@{/updateCategoria/{idCategoria}(idCategoria=${categoria.idCategoria})}" th:object="${categoria}" method="post">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="nombre" class="col-form-label">Nombre de Categoria</label>
-                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="nombre" required="required">
+                                <label for="nombre" class="col-form-label" th:text="#{categoria.name}">Nombre de la Categoria</label>
+                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-5">
-                                <input type="submit" class="btn btn-primary" value="Update Categoria">
+                                <input type="submit" class="btn btn-primary" th:value="#{update-categoria-btn-update}">
                             </div>
                         </div>    
                     </form>

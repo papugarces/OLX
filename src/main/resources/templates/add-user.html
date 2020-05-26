@@ -10,6 +10,15 @@
         <link rel="stylesheet" href="../css/shards.min.css">
     </head>
     <body>
+    
+    <select class="custom-select" id="locales">
+		<option selected th:text="#{language}">Open this select menu</option>
+		<option value="es" th:text="#{language.spanish}"></option>
+		<option value="en" th:text="#{language.english}"></option>
+		<option value="fr" th:text="#{language.french}"></option>
+
+	</select>
+    
     	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	        <a class="navbar-brand" href="#">OLX</a>
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -57,56 +66,56 @@
 	        </div>
 	    </nav>
         <div class="container my-5">
-            <h2 class="mb-5">New User</h2>
+            <h2 class="mb-5" th:text="#{add-user.title}">New User</h2>
             <div class="row">
                 <div class="col-md-6">
                     <form action="#" th:action="@{/addusuario}" th:object="${usuario}" method="post">
                         <div class="row">    
                             <div class="form-group col-md-6">
-                                <label for="id" class="col-form-label">Cedula</label>
+                                <label for="id" class="col-form-label" th:text="#{add-user.dni}">Cedula</label>
                                 <input type="number" th:field="*{dni}" class="form-control" id="id" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="correo" class="col-form-label">Correo</label>
-                                <input type="email" th:field="*{correo}" class="form-control" id="correo" placeholder="ejemplo@gma.com" required="required">
+                                <label for="correo" class="col-form-label" th:text="#{add-user.email}">Correo</label>
+                                <input type="email" th:field="*{correo}" class="form-control" id="correo" th:placeholder="#{add-user.email-ph}" required="required">
                                 <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="nombre" class="col-form-label">Nombres</label>
-                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Nombre" required="required">
+                                <label for="nombre" class="col-form-label" th:text="#{add-user.name}">Nombres</label>
+                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="apellido" class="col-form-label">Apellido</label>
-                                <input type="text" th:field="*{apellido}" class="form-control" id="apellido" placeholder="Apellidos" required="required">
+                                <label for="apellido" class="col-form-label" th:text="#{add-user.lastname}">Apellido</label>
+                                <input type="text" th:field="*{apellido}" class="form-control" id="apellido" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="password" class="col-form-label">Password</label>
-                                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="" required="required">
+                                <label for="password" class="col-form-label" th:text="#{add-user.password}">Password</label>
+                                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="direccion" class="col-form-label">Direccion</label>
+                                <label for="direccion" class="col-form-label" th:text="#{add-user.address}">Direccion</label>
                                 <input type="text" th:field="*{direccion}" class="form-control" id="direccion" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="fechaNacimiento" class="col-form-label">Fecha de Nacimiento</label>
-                                <input type="text" th:field="*{fechaNacimiento}" class="form-control" id="fechaNacimiento" placeholder="DD/MM/YYYY" required="required">
+                                <label for="fechaNacimiento" class="col-form-label" th:text="#{add-user.birthday}">Fecha de Nacimiento</label>
+                                <input type="text" th:field="*{fechaNacimiento}" class="form-control" id="fechaNacimiento" th:placeholder="#{add-user.birthday-ph}" required="required">
                                 <span th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}" class="text-danger"></span>
                             </div>
                             
                             <div class="form-group col-md-6">
-                                <label for="telefono" class="col-form-label">Telefono</label>
-                                <input type="number" th:field="*{telefono}" class="form-control" id="telefono" required="required">
+                                <label for="telefono" class="col-form-label" th:text="#{add-user.phone}">Telefono</label>
+                                <input type="number" th:field="*{telefono}" class="form-control" id="telefono" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-5">
-                                <input type="submit" class="btn btn-primary" value="Add User">
+                                <input type="submit" class="btn btn-primary" th:value="#{add-user.btn-add-user}">
                             </div>
                         </div>    
                     </form>
@@ -118,5 +127,15 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$("#locales").change(function() {
+				var selectedOption = $('#locales').val();
+				if (selectedOption != '') {
+					window.location.replace('singusuario?lang=' + selectedOption);
+				}
+			});
+		});
+	</script>
     </body>
 </html>

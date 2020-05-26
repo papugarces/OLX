@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -25,8 +26,9 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCategoria;
 
-	@NotBlank(message = "El campo nombre es obligatorio")
-	@Pattern(regexp="^[a-zA-Z ]*$", message="este nombre no es valido")
+	@NotBlank(message = "{name-mandatory}")
+	@Size(min= 3, max=50, message="{name-size}")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
 	private String nombre;
 
 	//bi-directional many-to-one association to Subcategoria

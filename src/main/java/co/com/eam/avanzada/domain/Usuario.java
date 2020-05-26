@@ -26,34 +26,39 @@ public class Usuario implements Serializable {
 
 
 	@Id
-	@NotNull(message = "El campo correo es obligatorio")
-	@Pattern(regexp="^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$", message="este no es un email valido")
+	@NotNull(message = "{email-mandatory}")
+	@Pattern(regexp="^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$", message="{email-valid}")
 	private String correo;
 	
-	@NotBlank(message = "El campo cédula es obligatorio")
-	@Size(min= 8, max=200, message="debe de tener minimo 8 caracteres")
+	@NotBlank(message = "{dni-mandatory}")
+	@Size(min= 5, max=20, message="{dni-size}")
 	private String dni;
 	
-	@NotBlank(message = "El campo apellido es obligatorio")
-	@Pattern(regexp="^[a-zA-Z ]*$", message="este nombre no es valido")
+	@NotBlank(message = "{lastname-mandatory}")
+	@Size(min= 3, max=50, message="{lastname-size}")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{lastname-valid}")
 	private String apellido;
 	
-	@NotBlank(message = "El campo clave es obligatorio")
-	@Size(min= 8, max=200, message="debe de tener minimo 8 caracteres")
+	@NotBlank(message = "{password-mandatory}")
+	@Size(min= 8, max=200, message="{password-size}")
 	private String password;
 
-	@NotBlank(message = "El campo dirección es obligatorio")
+	@NotBlank(message = "{address-mandatory}")
+	@Size(min= 7, max=255, message="{address-size}")
 	private String direccion;
 
 	@Column(name="fecha_nacimiento")
 	//@NotBlank(message = "Por favor dilegencie bien el campo DD/MM/YYYY")
+	//@Pattern(regexp="^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$", message="{date-valid}")
 	private Date fechaNacimiento;
 
-	@NotBlank(message = "El campo nombre es obligatorio")
-	@Pattern(regexp="^[a-zA-Z ]*$", message="este nombre no es valido")
+	@NotBlank(message = "{name-mandatory}")
+	@Size(min= 3, max=50, message="{name-size}")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
 	private String nombre;
 
-	@NotBlank(message = "El campo teléfono es obligatorio")
+	@NotBlank(message = "{phone-mandatory}")
+	@Size(min= 7, max=20, message="{phone-size}")
 	//@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private String telefono;
 

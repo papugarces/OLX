@@ -56,40 +56,40 @@
 	        </div>
 	    </nav>
         <div class="container my-5">
-            <h2 class="mb-5">Update User</h2>
+            <h2 class="mb-5" th:text="#{update-user.title}">Update User</h2>
             <div class="row">
                 <div class="col-md-6">
                     <form action="#" th:action="@{/updateusuario/{id}/{correo}(id=${usuario.dni},correo=${usuario.correo})}" th:object="${usuario}" method="post">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="nombre" class="col-form-label">Nombres</label>
+                                <label for="nombre" class="col-form-label" th:text="#{add-user.name}">Nombres</label>
                                 <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Nombre" required="required">
                                 <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="apellido" class="col-form-label">Apellido</label>
+                                <label for="apellido" class="col-form-label" th:text="#{add-user.lastname}">Apellido</label>
                                 <input type="text" th:field="*{apellido}" class="form-control" id="apellido" placeholder="Apellidos" required="required">
                                 <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="password" class="col-form-label">Password</label>
+                                <label for="password" class="col-form-label" th:text="#{add-user.password}">Password</label>
                                 <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="" required="required">
                                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="direccion" class="col-form-label">Direccion</label>
+                                <label for="direccion" class="col-form-label" th:text="#{add-user.address}">Direccion</label>
                                 <input type="text" th:field="*{direccion}" class="form-control" id="direccion" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
                             </div>                        
                             <div class="form-group col-md-6">
-                                <label for="telefono" class="col-form-label">Telefono</label>
+                                <label for="telefono" class="col-form-label" th:text="#{add-user.name}">Telefono</label>
                                 <input type="number" th:field="*{telefono}" class="form-control" id="telefono" required="required">
                                 <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-5">
-                                <input type="submit" class="btn btn-primary" value="Update User">
+                                <input type="submit" class="btn btn-primary" th:value="#{update-user.btn-update}">
                             </div>
                         </div>    
                     </form>
