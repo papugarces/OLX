@@ -38,7 +38,7 @@ public class CategoriaController {
         
         categoriaRepository.save(categoria);
         model.addAttribute("categorias", categoriaRepository.findAll());
-        return "lista-categoria";
+        return "redirect:/listacat";
     }
     
     //metodo Actualizar---------------------------------------------
@@ -67,7 +67,7 @@ public class CategoriaController {
     	Categoria categoria = categoriaRepository.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
         categoriaRepository.delete(categoria);
         model.addAttribute("categorias", categoriaRepository.findAll());
-        return "lista-categoria";
+        return "redirect:/listacat";
     }
     
  // Listado de Categorias  ---------------------------------------------

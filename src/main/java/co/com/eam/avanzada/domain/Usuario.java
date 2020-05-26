@@ -48,7 +48,7 @@ public class Usuario implements Serializable {
 	private String direccion;
 
 	@Column(name="fecha_nacimiento")
-	//@NotBlank(message = "Por favor dilegencie bien el campo DD/MM/YYYY")
+	
 	//@Pattern(regexp="^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$", message="{date-valid}")
 	private Date fechaNacimiento;
 
