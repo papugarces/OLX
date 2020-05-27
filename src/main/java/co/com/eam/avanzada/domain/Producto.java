@@ -45,7 +45,7 @@ public class Producto implements Serializable {
 	private String numContacto;
 
 
-	@NotBlank(message = "{price-mandatory}")
+	//@NotBlank(message = "{price-mandatory}")
 	//@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private double precio;
 

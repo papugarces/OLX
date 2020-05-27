@@ -28,6 +28,7 @@ public class Subcategoria implements Serializable {
 
 	@NotBlank(message = "{name-mandatory}")
 	@Size(min= 3, max=50, message="{name-size}")
+	@Column(unique=true)
 	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
 	private String nombre;
 
