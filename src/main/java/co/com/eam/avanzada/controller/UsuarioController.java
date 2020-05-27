@@ -46,7 +46,7 @@ public class UsuarioController {
 
         IusuarioRepository.save(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
-        return "lista-user";
+        return "redirect:/listauser";
     }
     
     //metodo Actualizar---------------------------------------------
@@ -67,7 +67,7 @@ public class UsuarioController {
         
     	IusuarioRepository.save(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
-        return "lista-user";
+        return "redirect:/listauser";
     }
     
     //metodo Eliminar---------------------------------------------
@@ -76,7 +76,7 @@ public class UsuarioController {
     	Usuario usuario = IusuarioRepository.findById(correo).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
     	IusuarioRepository.delete(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
-        return "lista-user";
+        return "redirect:/listauser";
     }
     
  // Listado de Usuarios  ---------------------------------------------

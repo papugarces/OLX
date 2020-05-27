@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -26,28 +27,29 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idProducto;
 	
-	//@NotBlank(message = "El campo descripción es obligatorio")
+	@NotBlank(message = "{description-mandatory}")
 	private String descripcion;
 
-	@NotBlank(message = "El campo dirección es obligatorio")
+	@NotBlank(message = "{address-mandatory}")
 	private String direccion;
 	
 	//@NotBlank(message = "El campo estado es obligatorio")
 	private boolean estado;
 
-	@NotNull(message = "Por favor diligencia bien el campo fecha (DD/MM/YYYY)")
+	@NotNull(message = "{date-mandatory}")
 	private Date fechaPublicacion;
 
-	@NotBlank(message = "El campo teléfono de contácto es obligatorio")
+	@NotBlank(message = "{phone-mandatory}")
+	@Size(min= 7, max=20, message="{phone-size}")
 	//@Pattern(regexp="/^[0-9]$/", message="Por favor solo ingresar numeros")
 	private String numContacto;
 
 
-	//@NotBlank(message = "El campo precio es obligatorio")
+	@NotBlank(message = "{price-mandatory}")
 	//@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private double precio;
 
-	@NotBlank(message = "El campo título es obligatorio")
+	@NotBlank(message = "{title-mandatory}")
 	private String titulo;
 
 	//bi-directional many-to-one association to Imgproducto

@@ -62,7 +62,7 @@
 	        </div>
 	    </nav>
 	<div class="container my-5">
-		<h2 class="mb-5">Update Producto</h2>
+		<h2 class="mb-5" th:text="#{update-producto.title}">Update Producto</h2>
 		<div class="row">
 			<div class="col-md-6">
 				<form action="#"
@@ -70,28 +70,28 @@
 					th:object="${producto}" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="titulo" class="col-form-label">Titulo</label> <input
+							<label for="titulo" class="col-form-label" th:text="#{producto.title}">Titulo</label> <input
 								type="text" th:field="*{titulo}" class="form-control"
 								id="titulo" placeholder="titulo" required="required"> <span
 								th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="descripcion" class="col-form-label">Descripcion</label>
+							<label for="descripcion" class="col-form-label" th:text="#{producto.description}">Descripcion</label>
 							<input type="text" th:field="*{descripcion}" class="form-control"
 								id="descripcion"> <span
 								th:if="${#fields.hasErrors('descripcion')}"
 								th:errors="*{descripcion}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="direccion" class="col-form-label">Direccion</label> <input
+							<label for="direccion" class="col-form-label" th:text="#{producto.address}">Direccion</label> <input
 								type="text" th:field="*{direccion}" class="form-control"
 								id="direccion" placeholder="..." required="required"> <span
 								th:if="${#fields.hasErrors('direccion')}"
 								th:errors="*{direccion}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="estado" class="col-form-label">Estado</label> <select
+							<label for="estado" class="col-form-label" th:text="#{producto.state}">Estado</label> <select
 								th:field="*{estado}" class="custom-select"
 								id="validationTooltip04">
 								<option th:value="${true}" th:text="Activo"></option>
@@ -99,7 +99,7 @@
 							</select>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="validationTooltip04">Usuario</label> <select
+							<label for="validationTooltip04" th:text="#{producto.user.dni}" >Usuario</label> <select
 								th:field="*{usuario.id.dni}" class="custom-select"
 								id="validationTooltip04">
 								<option th:each="usuario : ${usuarios}"
@@ -109,7 +109,7 @@
 								th:errors="*{usuario.id.dni}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="validationTooltip04">Correo</label> <select
+							<label for="validationTooltip04" th:text="#{producto.user.correo}">Correo</label> <select
 								th:field="*{usuario.id.correo}" class="custom-select"
 								id="validationTooltip04">
 								<option th:each="usuario : ${usuarios}"
@@ -118,7 +118,7 @@
 								th:errors="*{usuario.id.correo}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="numContacto" class="col-form-label">Numero de
+							<label for="numContacto" class="col-form-label" th:text="#{producto.phone}">Numero de
 								contacto</label> <input type="number" th:field="*{numContacto}"
 								class="form-control" id="numContacto" placeholder="#"
 								required="required"> <span
@@ -126,15 +126,14 @@
 								th:errors="*{numContacto}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="precio" class="col-form-label">Precio del
-								producto</label> <input type="number" th:field="*{precio}"
+							<label for="precio" class="col-form-label" th:text="#{producto.price}">Precio</label> <input type="number" th:field="*{precio}"
 								class="form-control" id="precio" placeholder="$"
 								required="required"> <span
 								th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="validationTooltip04">Municipio</label> <select
+							<label for="validationTooltip04" th:text="#{producto.town}">Municipio</label> <select
 								th:field="*{municipio.id}" class="custom-select"
 								id="validationTooltip04">
 								<option th:each="municipio : ${municipios}"
@@ -163,7 +162,7 @@
 					<div class="row">
 						<div class="col-md-6 mt-5">
 							<input type="submit" class="btn btn-primary"
-								value="Update Producto">
+								th:value="#{update-producto.btn-update}">
 						</div>
 					</div>
 				</form>
