@@ -58,7 +58,7 @@ public class CategoriaController {
         
         categoriaRepository.save(categoria);
         model.addAttribute("categorias", categoriaRepository.findAll());
-        return "lista-categoria";
+        return "redirect:/listacat";
     }
     
     //metodo Eliminar---------------------------------------------

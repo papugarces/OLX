@@ -38,13 +38,14 @@ public class SubCategoriaController {
     
     @PostMapping("/addsubcategoria")
     public String addSubCategoria(@Valid Subcategoria subcategoria, BindingResult result, Model model) {
+    	model.addAttribute("categorias", categoriaRepository.findAll());
         if (result.hasErrors()) {
             return "add-subCategoria";
         }
         
         subCategoriaRepository.save(subcategoria);
         model.addAttribute("subcategorias", subCategoriaRepository.findAll());
-        return "lista-subCategoria";
+        return "redirect:/listasubca";
     }
     
     //metodo Actualizar---------------------------------------------
@@ -65,7 +66,7 @@ public class SubCategoriaController {
         
         subCategoriaRepository.save(subcategoria);
         model.addAttribute("subcategorias", subCategoriaRepository.findAll());
-        return "lista-subCategoria";
+        return "redirect:/listasubca";
     }
     
     //metodo Eliminar---------------------------------------------
@@ -74,7 +75,7 @@ public class SubCategoriaController {
     	Subcategoria subcategoria = subCategoriaRepository.findById(idSubCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido SubCategoria idSubCategoria:" + idSubCategoria));
     	subCategoriaRepository.delete(subcategoria);
         model.addAttribute("subcategorias", subCategoriaRepository.findAll());
-        return "lista-subCategoria";
+        return "redirect:/listasubca";
     }
     
     
