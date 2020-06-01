@@ -1,0 +1,65 @@
+#logo_p {
+  width:60px;
+  height: auto;
+  margin-left: 10px;
+  margin-top: -8px;
+  padding: 0px;
+}
+#ul-nav{
+  margin-left: 50px;
+  color: #ffffff;
+}
+
+#btn-header{
+  margin-left: 60px;
+}
+#btn-header button{
+  color: #ffffff;
+  background-color: #ff870a;
+  border-color: #222222;
+}
+
+#btn-form button{
+  background-color: #222;
+  color:#ffffff;
+}
+
+#button-addon2 {
+  font-weight: normal;
+}
+
+
+#menu_c{
+  margin-top:-15px;
+  margin-left: -10px;
+}
+
+#menu_c a{
+  color: #000000;
+}
+footer{
+  background-color: #5a2a80;
+}
+footer a,li{
+  color: #000000;
+  list-style: none;
+}
+footer h6{
+  color: #000000;
+  font-weight: bolder;
+}
+#carrusel{
+  width: 1140px;
+  height: 500px;
+  margin-bottom: 40px;
+}
+
+#produc_car{
+	font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 3px;
+    width: 10px;
+    
+}
