@@ -123,7 +123,7 @@ public class ProductoController {
 	@GetMapping("/productos-disponibles")
 	public String traerSoloDisponibles(Model model) {
 		model.addAttribute("productos", iProductoRepository.cargarProductosActivos());
-		return "productos-dis";
+		return "ejemplo";
 	}
 	
 	

@@ -31,13 +31,13 @@ public class UsuarioController {
 	//metodo Agregar---------------------------------------------
     @GetMapping("/singusuario")
     public String showSignUpForm(Usuario usuario) {
-        return "add-user";
+        return "ejemplo";
     }
     
     @PostMapping("/addusuario")
     public String addUsuario(@Valid Usuario usuario, BindingResult result, Model model) throws ParseException {
         if (result.hasErrors()) {
-            return "add-user";
+            return "ejemplo";
         }
         
         String entrada = "03/12/2001";
