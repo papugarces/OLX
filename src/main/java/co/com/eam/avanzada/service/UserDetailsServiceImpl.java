@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import co.com.eam.avanzada.domain.Usuario;
 import co.com.eam.avanzada.repository.IUsuarioRepository;
-import co.com.springboot.entity.Authority;
+import co.com.eam.avanzada.domain.Authority;
 
 
 @Service
@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 		
     //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-    UserDetails user = (UserDetails) new User(appUser.getCorreo()(), appUser.getPassword(), grantList);
+    UserDetails user = (UserDetails) new User(appUser.getCorreo(), appUser.getPassword(), grantList);
          return user;
     }
 }

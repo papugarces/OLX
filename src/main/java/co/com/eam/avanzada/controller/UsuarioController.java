@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -15,13 +17,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import co.com.eam.avanzada.domain.Authority;
 import co.com.eam.avanzada.domain.Usuario;
+import co.com.eam.avanzada.repository.AuthorityRepository;
 import co.com.eam.avanzada.repository.IUsuarioRepository;
+import co.com.eam.avanzada.util.Passgenerator;
 
 @Controller
 public class UsuarioController {
 
 	private final IUsuarioRepository IusuarioRepository;
+	
+	@Autowired
+   	private AuthorityRepository authorityRepository;
+	
+	@Autowired
+    Passgenerator passgenerator;
 
 	@Autowired
 	public UsuarioController(IUsuarioRepository IusuarioRepository) {
@@ -29,8 +40,8 @@ public class UsuarioController {
 	}
 	
 	//metodo Agregar---------------------------------------------
-    @GetMapping("/singusuario")
-    public String showSignUpForm(Usuario usuario) {
+    @GetMapping("/addusuario")
+    public String showSignUpFormAddUser(Usuario usuario) {
         return "add-user";
     }
     
@@ -40,15 +51,47 @@ public class UsuarioController {
             return "add-user";
         }
         
-        String entrada = "03/12/2001";
-        DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
-        Date fecha = (Date) format.parse(entrada);
+        //String entrada = "03/12/2001";
+        //DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+        //Date fecha = (Date) format.parse(entrada);
+        
+        Authority autorizacion= authorityRepository.findByAuthority("ROLE_USER");
+        
+        Set<Authority> authority= new HashSet<Authority>();
+        authority.add(autorizacion);
+        
+        usuario.setAuthority(authority);
+		usuario.setPassword(passgenerator.enciptarPassword(usuario.getPassword()));
 
         IusuarioRepository.save(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
         return "redirect:/listauser";
     }
     
+    @GetMapping("/signup")
+    public String showSignUpForm(Usuario usuario) {
+        return "registrarse";
+    }
+    
+    @PostMapping("/user-registration")
+    public String userRegistration(@Valid Usuario usuario, BindingResult result, Model model) throws ParseException {
+        if (result.hasErrors()) {
+            return "registrarse";
+        }
+        
+        Authority autorizacion= authorityRepository.findByAuthority("ROLE_USER");
+           
+        Set<Authority> authority= new HashSet<Authority>();
+        authority.add(autorizacion);
+        
+        usuario.setAuthority(authority);
+		usuario.setPassword(passgenerator.enciptarPassword(usuario.getPassword()));
+                
+        IusuarioRepository.save(usuario);
+        return "redirect:/login";
+    }
+       
+        
     //metodo Actualizar---------------------------------------------
     @GetMapping("/editusuario/{id}/{correo}")
     public String showUpdateForm(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {

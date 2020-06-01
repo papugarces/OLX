@@ -7,10 +7,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
 import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -32,6 +34,7 @@ public class Usuario implements Serializable {
 	
 	@NotBlank(message = "{dni-mandatory}")
 	@Size(min= 5, max=20, message="{dni-size}")
+	@Column(unique=true)
 	private String dni;
 	
 	@NotBlank(message = "{lastname-mandatory}")
@@ -65,7 +68,16 @@ public class Usuario implements Serializable {
 	//bi-directional many-to-one association to Producto
 	@OneToMany(mappedBy="usuario",cascade={CascadeType.ALL})
 	private List<Producto> productos;
-
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+		name = "authorities_users", 
+		joinColumns = @JoinColumn(name = "usuario_correo", nullable=false), 
+		inverseJoinColumns = @JoinColumn(name = "authority_id", nullable=false)
+	)
+	private Set<Authority> authority;
+	
+	
 	public Producto addProducto(Producto producto) {
 		getProductos().add(producto);
 		producto.setUsuario(this);
