@@ -48,7 +48,7 @@ public class ProductoController {
 	}
 
 	// metodo Agregar---------------------------------------------
-	@GetMapping("/singproducto")
+	@GetMapping("/user/singproducto")
 	public String showSignUpForm(Producto producto, Model model) {
 		model.addAttribute("municipios", imunicipioRepository.findAll());
 		model.addAttribute("subcategorias", isubcategoriaRepository.findAll());
@@ -56,7 +56,7 @@ public class ProductoController {
 		return "add-producto";
 	}
 
-	@PostMapping("/addproducto")
+	@PostMapping("/user/addproducto")
 	public String addProducto(@Valid Producto producto, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "add-producto";
@@ -68,7 +68,7 @@ public class ProductoController {
 	}
 
 	// metodo Actualizar---------------------------------------------
-	@GetMapping("/editproducto/{idProducto}")
+	@GetMapping("/user/editproducto/{idProducto}")
 	public String showUpdateForm(@PathVariable("idProducto") Integer idProducto, Model model) {
 		Producto producto = iProductoRepository.findById(idProducto)
 				.orElseThrow(() -> new IllegalArgumentException("Invalido El Producto id:" + idProducto));
@@ -79,7 +79,7 @@ public class ProductoController {
 		return "update-producto";
 	}
 
-	@PostMapping("/updateproducto/{idProducto}")
+	@PostMapping("/user/updateproducto/{idProducto}")
 	public String updateProducto(@PathVariable("idProducto") Integer idProducto, @Valid Producto producto,
 			BindingResult result, Model model, @RequestParam("files") MultipartFile[] files) {
 		if (result.hasErrors()) {
@@ -110,7 +110,7 @@ public class ProductoController {
 	}
 
 	// metodo Eliminar---------------------------------------------
-	@GetMapping("/deleteproducto/{idProducto}")
+	@GetMapping("/user/deleteproducto/{idProducto}")
 	public String deleteProducto(@PathVariable("idProducto") Integer idProducto, Model model) {
 		Producto producto = iProductoRepository.findById(idProducto)
 				.orElseThrow(() -> new IllegalArgumentException("Invalido El Producto id:" + idProducto));
@@ -120,7 +120,7 @@ public class ProductoController {
 	}
 
 	// metodo productos disponibles ---------------------------------------------
-	@GetMapping("/productos-disponibles")
+	@GetMapping("/user/productos-disponibles")
 	public String traerSoloDisponibles(Model model) {
 		model.addAttribute("productos", iProductoRepository.cargarProductosActivos());
 		return "index";
@@ -128,7 +128,7 @@ public class ProductoController {
 	
 	
 	// Listado de productos  ---------------------------------------------
-	@GetMapping("/listapro")
+	@GetMapping("/admin/listapro")
 	public String list(Producto producto, Model model) {
 		model.addAttribute("productos", iProductoRepository.findAll());
 		return "lista-productos";

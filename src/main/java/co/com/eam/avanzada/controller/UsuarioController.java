@@ -40,12 +40,12 @@ public class UsuarioController {
 	}
 	
 	//metodo Agregar---------------------------------------------
-    @GetMapping("/addusuario")
+    @GetMapping("/admin/add-usuario")
     public String showSignUpFormAddUser(Usuario usuario) {
         return "add-user";
     }
     
-    @PostMapping("/addusuario")
+    @PostMapping("/admin/addusuario")
     public String addUsuario(@Valid Usuario usuario, BindingResult result, Model model) throws ParseException {
         if (result.hasErrors()) {
             return "add-user";
@@ -65,7 +65,7 @@ public class UsuarioController {
 
         IusuarioRepository.save(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
-        return "redirect:/listauser";
+        return "redirect:/admin/listauser";
     }
     
     @GetMapping("/signup")
@@ -93,14 +93,14 @@ public class UsuarioController {
        
         
     //metodo Actualizar---------------------------------------------
-    @GetMapping("/editusuario/{id}/{correo}")
+    @GetMapping("/admin/editusuario/{id}/{correo}")
     public String showUpdateForm(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {
     	Usuario usuario = IusuarioRepository.findById(correo).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
         model.addAttribute("usuario", usuario);
         return "update-user";
     }
     
-    @PostMapping("/updateusuario/{id}/{correo}")
+    @PostMapping("/admin/updateusuario/{id}/{correo}")
     public String updateUsuario(@PathVariable("id") String id,@PathVariable("correo") String correo, @Valid Usuario usuario, BindingResult result, Model model) {
     	if (result.hasErrors()) {
         	usuario.setDni(id);
@@ -110,20 +110,20 @@ public class UsuarioController {
         
     	IusuarioRepository.save(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
-        return "redirect:/listauser";
+        return "redirect:/admin/listauser";
     }
     
     //metodo Eliminar---------------------------------------------
-    @GetMapping("/deleteusuario/{id}/{correo}")
+    @GetMapping("/admin/deleteusuario/{id}/{correo}")
     public String deleteUsuario(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {
     	Usuario usuario = IusuarioRepository.findById(correo).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
     	IusuarioRepository.delete(usuario);
         model.addAttribute("usuarios", IusuarioRepository.findAll());
-        return "redirect:/listauser";
+        return "redirect:/admin/listauser";
     }
     
  // Listado de Usuarios  ---------------------------------------------
- 	@GetMapping("/listauser")
+ 	@GetMapping("/admin")
  	public String list(Usuario usuario, Model model) {
  		model.addAttribute("usuarios", IusuarioRepository.findAll());
  		return "lista-user";

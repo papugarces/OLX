@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -51,8 +52,11 @@ public class Usuario implements Serializable {
 	private String direccion;
 
 	@Column(name="fecha_nacimiento")
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
 	//@Pattern(regexp="^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$", message="{date-valid}")
+
+	@NotNull(message="{date-valid}")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date fechaNacimiento;
 
 	@NotBlank(message = "{name-mandatory}")

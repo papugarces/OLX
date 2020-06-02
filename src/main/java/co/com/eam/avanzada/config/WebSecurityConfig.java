@@ -21,11 +21,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(resources).permitAll().antMatchers("/", "/index","/signup","/login","/user-registration").permitAll() // register decía user
+		http.authorizeRequests().antMatchers(resources).permitAll().antMatchers("/","/signup","/login","/user-registration").permitAll() // register decía user
 				.antMatchers("/admin*").access("hasRole('ADMIN')").antMatchers("/user*")
-				.access("hasRole('USER') or hasRole('ADMIN')").anyRequest().authenticated().and().formLogin()
-				.loginPage("/login").permitAll().defaultSuccessUrl("/menu").failureUrl("/login?error=true")
-				.usernameParameter("username").passwordParameter("password").and().logout().permitAll()
+				.access("hasRole('USER') or hasRole('ADMIN')").and().formLogin()
+				.loginPage("/login").defaultSuccessUrl("/menu").failureUrl("/login?error=true")
+				.usernameParameter("correo").passwordParameter("password").and().logout().permitAll()
 				.logoutSuccessUrl("/login?logout");
 	}
 

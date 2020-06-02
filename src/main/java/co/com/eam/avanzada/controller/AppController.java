@@ -44,10 +44,14 @@ public class AppController {
 		return "user";
 	}
 	
-	@GetMapping("/admin")
-	public String admin() {
-		return "admin";
-	}
+	//@GetMapping("/admin")
+	//public String admin() {
+	//	return "admin";
+	//}
 	
+	@GetMapping("/header-admin")
+	public String headerAdmin() {
+		return "header-admin";
+	}
 	
 }
