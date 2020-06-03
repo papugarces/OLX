@@ -19,17 +19,17 @@
 				          Categorías
 				        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="/admin/signcategoria">Agregar Categoría</a>
+				          <a class="dropdown-item" href="signcategoria">Agregar Categoría</a>
 				          
-				          <a class="dropdown-item" href="/admin/listacat">Lista de Categorías</a>
+				          <a class="dropdown-item" href="listacat">Lista de Categorías</a>
 				    </li>
 	                <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				          Subcategorías
 				        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="/admin/singsubcategoria">Agregar SubCategorías</a>
-				          <a class="dropdown-item" href="/admin/listasubca">Lista de SubCategorías</a>
+				          <a class="dropdown-item" href="singsubcategoria">Agregar SubCategorías</a>
+				          <a class="dropdown-item" href="listasubca">Lista de SubCategorías</a>
 				    </li>
 	                <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,9 +48,10 @@
 				          <a class="dropdown-item" href="/admin/listapro">Listado de Productos</a>
 				        </div>
 				    </li>
-				    <li class="nav-item">
-	                    <a class="nav-link" href="nuevo-chat">Gestion Chat</a>
-	                </li>
+				    
+	                <form th:action="@{/logout}" method="post" class="col-md-2">
+            			<input type="submit" class="btn btn-primary" value="Cerrar Sesion"/>
+        			</form>
 	            </ul>
 	        </div>
 	    </nav>
@@ -59,7 +60,7 @@
             <h2 class="mb-5" th:text="#{update-user.title}">Update User</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <form action="#" th:action="@{/admin/updateusuario/{id}/{correo}(id=${usuario.dni},correo=${usuario.correo})}" th:object="${usuario}" method="post">
+                    <form action="#" th:action="@{/admin/updateusuario/{correo}(correo=${usuario.correo})}" th:object="${usuario}" method="post">
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="nombre" class="col-form-label" th:text="#{add-user.name}">Nombres</label>
@@ -72,6 +73,11 @@
                                 <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-6">
+                                <label for="dni" class="col-form-label" th:text="#{add-user.dni}">Cedula</label>
+                                <input type="number" th:field="*{dni}" class="form-control" id="dni" placeholder="..." >
+                                <span th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="password" class="col-form-label" th:text="#{add-user.password}">Password</label>
                                 <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="" required="required">
                                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
@@ -80,9 +86,14 @@
                                 <label for="direccion" class="col-form-label" th:text="#{add-user.address}">Direccion</label>
                                 <input type="text" th:field="*{direccion}" class="form-control" id="direccion" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="fechaNacimiento" class="col-form-label" th:text="#{add-user.birthday}">Fecha de Nacimiento</label>
+                                <input type="text" th:field="*{fechaNacimiento}" class="form-control" id="fechaNacimiento" th:placeholder="#{add-user.birthday-ph}" >
+                                <span th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}" class="text-danger"></span>
                             </div>                        
                             <div class="form-group col-md-6">
-                                <label for="telefono" class="col-form-label" th:text="#{add-user.name}">Telefono</label>
+                                <label for="telefono" class="col-form-label" th:text="#{add-user.phone}">Telefono</label>
                                 <input type="number" th:field="*{telefono}" class="form-control" id="telefono" required="required">
                                 <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="text-danger"></span>
                             </div>

@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -137,6 +138,7 @@ public class ProductoController {
 	}
 
 	// Listado de productos ---------------------------------------------
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/admin/listapro")
 	public String list(Producto producto, Model model) {
 		model.addAttribute("productos", iProductoRepository.findAll());

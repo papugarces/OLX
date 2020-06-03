@@ -3,6 +3,7 @@ package co.com.eam.avanzada.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ public class CategoriaController {
     }
     
     //metodo Agregar---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/signcategoria")
     public String showSignUpForm(Categoria categoria) {
         return "add-categoria";
@@ -42,6 +44,7 @@ public class CategoriaController {
     }
     
     //metodo Actualizar---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/editCategoria/{idCategoria}")
     public String showUpdateForm(@PathVariable("idCategoria") int idCategoria, Model model) {
     	Categoria categoria = categoriaRepository.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
@@ -62,6 +65,7 @@ public class CategoriaController {
     }
     
     //metodo Eliminar---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/deleteCategoria/{idCategoria}")
     public String deleteCategoria(@PathVariable("idCategoria") int idCategoria, Model model) {
     	Categoria categoria = categoriaRepository.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
@@ -71,6 +75,7 @@ public class CategoriaController {
     }
     
  // Listado de Categorias  ---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
   	@GetMapping("/listacat")
   	public String list(Categoria categoria, Model model) {
   		model.addAttribute("categorias", categoriaRepository.findAll());

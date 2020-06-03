@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,6 +41,7 @@ public class UsuarioController {
 	}
 	
 	//metodo Agregar---------------------------------------------
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin/add-usuario")
     public String showSignUpFormAddUser(Usuario usuario) {
         return "add-user";
@@ -93,17 +95,17 @@ public class UsuarioController {
        
         
     //metodo Actualizar---------------------------------------------
-    @GetMapping("/admin/editusuario/{id}/{correo}")
-    public String showUpdateForm(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {
-    	Usuario usuario = IusuarioRepository.findById(correo).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin/editusuario/{correo}")
+    public String showUpdateForm(@PathVariable("correo") String correo, Model model) {
+    	Usuario usuario = IusuarioRepository.findById(correo).orElseThrow(() -> new IllegalArgumentException("Invalido usuario correo:" + correo));
         model.addAttribute("usuario", usuario);
         return "update-user";
     }
     
-    @PostMapping("/admin/updateusuario/{id}/{correo}")
-    public String updateUsuario(@PathVariable("id") String id,@PathVariable("correo") String correo, @Valid Usuario usuario, BindingResult result, Model model) {
+    @PostMapping("/admin/updateusuario/{correo}")
+    public String updateUsuario(@PathVariable("correo") String correo, @Valid Usuario usuario, BindingResult result, Model model) {
     	if (result.hasErrors()) {
-        	usuario.setDni(id);
         	usuario.setCorreo(correo);
             return "update-user";
         }
@@ -114,6 +116,7 @@ public class UsuarioController {
     }
     
     //metodo Eliminar---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin/deleteusuario/{id}/{correo}")
     public String deleteUsuario(@PathVariable("id") String id,@PathVariable("correo") String correo, Model model) {
     	Usuario usuario = IusuarioRepository.findById(correo).orElseThrow(() -> new IllegalArgumentException("Invalido usuario id:" + id));
@@ -123,7 +126,8 @@ public class UsuarioController {
     }
     
  // Listado de Usuarios  ---------------------------------------------
- 	@GetMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+ 	@GetMapping("/admin/listauser")
  	public String list(Usuario usuario, Model model) {
  		model.addAttribute("usuarios", IusuarioRepository.findAll());
  		return "lista-user";

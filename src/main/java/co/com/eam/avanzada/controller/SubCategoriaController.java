@@ -5,6 +5,7 @@ package co.com.eam.avanzada.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,7 @@ public class SubCategoriaController {
     }
     
     //metodo Agregar---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/singsubcategoria")
     public String showSignUpForm(Subcategoria subcategoria,Model model) {
     	model.addAttribute("categorias", categoriaRepository.findAll());
@@ -49,6 +51,7 @@ public class SubCategoriaController {
     }
     
     //metodo Actualizar---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/editSubCategoria/{idSubCategoria}")
     public String showUpdateForm(@PathVariable("idSubCategoria") int idSubCategoria, Model model) {
     	Subcategoria subcategoria = subCategoriaRepository.findById(idSubCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido SubCategoria idSubCategoria:" + idSubCategoria));
@@ -70,6 +73,7 @@ public class SubCategoriaController {
     }
     
     //metodo Eliminar---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/deleteSubCategoria/{idSubCategoria}")
     public String deleteSubCategoria(@PathVariable("idSubCategoria") int idSubCategoria, Model model) {
     	Subcategoria subcategoria = subCategoriaRepository.findById(idSubCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido SubCategoria idSubCategoria:" + idSubCategoria));
@@ -80,6 +84,7 @@ public class SubCategoriaController {
     
     
     // Listado de subCategorias  ---------------------------------------------
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
  	@GetMapping("/listasubca")
  	public String list(Subcategoria subcategoria, Model model) {
  		model.addAttribute("subcategorias", subCategoriaRepository.findAll());

@@ -3,14 +3,20 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
     	<meta charset="UTF-8">
-        <title>Hello World!</title>
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/shards.min.css">
+        <title>Menú Principal</title>
     </head>
     <body>
     	
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Cerrar Sesion"/>
+            <input type="submit" class="btn btn-primary" value="Cerrar Sesion"/>
         </form>
-        <h1><a sec:authentication="ADMIN" sec:authorize="hasRole('ADMIN')" th:href="@{/admin}"> admin</a> | <a th:href="@{/user/productos-disponibles}"> user</a></h1>
+        <h1>
+        	<a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{/admin/listauser}"> admin</a> | 
+        	<a th:href="@{/user/productos-disponibles}"> user</a>
+        </h1>
     </body>
 </html>

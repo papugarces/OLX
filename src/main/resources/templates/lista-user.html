@@ -86,8 +86,8 @@
                                     <td th:text="${usuario.telefono}"></td>
                                     
                                     
-                                    <td><a th:href="@{/admin/editusuario/{id}/{correo}(id=${usuario.dni}, correo=${usuario.correo})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-                                    <td><a th:href="@{/admin/deleteusuario/{id}/{correo}(id=${usuario.dni}, correo=${usuario.correo})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+                                    <td><a th:href="@{/admin/editusuario/{correo}(correo=${usuario.correo})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                                    <td><a th:href="@{/admin/deleteusuario/{correo}(correo=${usuario.correo})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
