@@ -91,7 +91,7 @@ public class Usuario implements Serializable {
 
 	public Producto removeProducto(Producto producto) {
 		getProductos().remove(producto);
-		producto.setUsuario(null);
+		producto.setUsuario(this);
 
 		return producto;
 	}

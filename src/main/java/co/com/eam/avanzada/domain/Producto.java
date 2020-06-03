@@ -62,13 +62,17 @@ public class Producto implements Serializable {
 	private Municipio municipio;
 
 	//bi-directional many-to-one association to Usuario
+	//@ManyToOne
+	//@JoinColumns({
+	//	@JoinColumn(name="correoContacto", referencedColumnName="correo"),
+	//	@JoinColumn(name="idUsuario", referencedColumnName="dni")
+	//	})
+	//private Usuario usuario;
+	
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="correoContacto", referencedColumnName="correo"),
-		@JoinColumn(name="idUsuario", referencedColumnName="dni")
-		})
+	@JoinColumn(name="correoContacto")
 	private Usuario usuario;
-
+	
 	//bi-directional many-to-one association to Subcategoria
 	@ManyToOne
 	@JoinColumn(name="idSubcategoria")

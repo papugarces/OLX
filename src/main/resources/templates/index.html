@@ -56,6 +56,11 @@
 								method="post">
 								<button type="submit" class="btn btn-primary">Logout</button>
 							</form>
+							<form class="col-md-1 navbar-btn btn-group" role="group"
+								aria-label="..." id="btn-header" th:action="@{/user/crear-publicacion/{correo}(correo=${#httpServletRequest.remoteUser})}"
+								method="get">
+								<button type="submit" class="btn btn-primary">Anunciar</button>
+							</form>
 						</div>
 					</div>
 				</nav>
@@ -167,7 +172,7 @@
 							<span id="produc_car" th:text="${producto.descripcion}"></span>
 							<p>
 								<a
-									th:href="@{/verproducto/{idProducto}(idProducto=${producto.idProducto})}"
+									th:href="@{/user/verproducto/{idProducto}(idProducto=${producto.idProducto})}"
 									class="btn btn-primary" role="button">Ver Producto</a>
 							</p>
 						</div>

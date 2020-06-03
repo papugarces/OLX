@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Publicar un producto</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/shards.min.css">
+    </head>
+<body>
+	    
+        <div class="container my-5">
+            <h2 class="mb-5" th:text="#{add-producto.title}">New Producto</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="#" th:action="@{/user/publicar/{correo}(correo=${#httpServletRequest.remoteUser})}" th:object="${producto}" method="post" name="registro">
+                        <div class="row">
+                        	<div class="form-group col-md-6">
+                                <label for="titulo" class="col-form-label" th:text="#{producto.title}">Titulo</label>
+                                <input type="text" th:field="*{titulo}" class="form-control" id="titulo" placeholder="titulo" required="required">
+                                <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="text-danger"></span>
+                            </div>    
+                            <div class="form-group col-md-6">
+                                <label for="descripcion" class="col-form-label" th:text="#{producto.description}">Descripcion</label>
+                                <input type="text" th:field="*{descripcion}" class="form-control" id="descripcion" >
+                                <span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="direccion" class="col-form-label" th:text="#{producto.address}">Direccion</label>
+                                <input type="text" th:field="*{direccion}" class="form-control" id="direccion" placeholder="..." required="required">
+                                <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label for="fechaPublicacion" class="col-form-label" th:text="#{producto.date}">Fecha de Publicacion</label>
+                                <input type="text" th:field="*{fechaPublicacion}" class="form-control" id="fechaPublicacion" th:placeholder="#{producto.date-ph}" required="required">
+                                <span th:if="${#fields.hasErrors('fechaPublicacion')}" th:errors="*{fechaPublicacion}" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label for="numContacto" class="col-form-label" th:text="#{producto.phone}">Numero de contacto</label>
+                                <input type="number" th:field="*{numContacto}" class="form-control" id="numContacto" placeholder="#"  required="required">
+                                <span th:if="${#fields.hasErrors('numContacto')}" th:errors="*{numContacto}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="precio" class="col-form-label" th:text="#{producto.price}">Precio del producto</label>
+                                <input type="number" th:field="*{precio}" class="form-control" id="precio" placeholder="$" required="required">
+                                <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                            	<label for="validationTooltip04" th:text="#{producto.town}">Municipio</label>
+                      			<select th:field="*{municipio.id}" class="custom-select" id="validationTooltip04"  >
+                        			<option th:each="municipio : ${municipios}" th:value="${municipio.id}"
+                        			th:text="${municipio.nombre}" th:selected="false"/>
+                    			</select>
+                    			<span th:if="${#fields.hasErrors('municipio.id')}" th:errors="*{municipio.id}" class="text-danger"></span>
+                            </div>
+                    <!--  
+                            <div class="form-group col-md-6">
+								<label >Departamento</label> 
+								<select th:field="*{idDepartamento}" required="required" class="form-control">
+								<option th:each="departamento : ${departamentos}" th:value="${departamentos.id}" th:text="${departamentos.nombre}" />
+								</select>
+							</div>
+					
+                            <div class="form-group col-md-6">
+                            	<label for="municipio" th:text="#{producto.town}">Municipio</label>
+                      			<select th:field="*{municipio}" required="required" class="form-control"  >
+                        			<option th:fragment="municipios" th:each= "municipio : ${municipios}" th:value="${municipio}"
+                        			th:text="${municipio.nombre}" />
+                    			</select>
+                    			<span th:if="${#fields.hasErrors('municipio.id')}" th:errors="*{municipio.id}" class="text-danger"></span>
+                            </div>
+                            
+                     -->
+                            
+                           	<div class="form-group col-md-6">
+                           		<label for="validationTooltip04" th:text="#{producto.subcategory}">SubCategoria</label>
+                      			<select th:field="*{subcategoria.idSubCategoria}" class="custom-select" id="validationTooltip04"  >
+                        			<option th:each="subcategoria : ${subcategorias}" th:value="${subcategoria.idSubCategoria}"
+                        			th:text="${subcategoria.nombre}" th:selected="false"/>
+                    			</select>
+                    			<span th:if="${#fields.hasErrors('subcategoria.idSubCategoria')}" th:errors="*{subcategoria.idSubCategoria}" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <input type="submit" class="btn btn-primary" th:value="#{add-producto.btn-add}">
+                            </div>
+                        </div>    
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!-- Optional JavaScript -->
+    <!-- 
+    <script th:inline="javascript">
+		$(function() {
+			$("#municipio").load('publicar/ajax/municipios', $("#idDepartamento").serialize());
+			$('#idDepartamento').on('change', function() {
+				$("#municipio").load('add-producto/ajax/municipios', $("#idDepartamento").serialize());
+			});
+		});
+	</script>
+	 -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

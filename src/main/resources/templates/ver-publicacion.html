@@ -114,13 +114,13 @@
 		<div class="row" id="p_des">
 			<div class="col-lg-7" id="p_imagen">
 				<div class="row">
-					<!-- aqui van aver la imagen grande del producto-->
+					<!-- aqui van a ver la imagen grande del producto-->
 					<div class="col-lg-12">
 						<img src="/img/produc1.jpg" alt="..." id="img_big">
 					</div>
 				</div>
 				<div class="row" id="s_imagen">
-					<!-- aqui van aver las imagenes pequeñas del producto-->
+					<!-- aqui van a ver las imagenes pequeñas del producto-->
 					<div class="col-lg-2">
 						<img src="/img/produc2.jpg" alt="..." id="img_small">
 					</div>
@@ -163,6 +163,12 @@
 			<div class="col-lg-7" id="descripcion_p">
 				<h4>Descripcion Del Producto</h4>
 				<h5 th:text="${producto.descripcion}"></h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4" id="btnModificarProd">
+				<a th:href="@{/user/edit-producto/{id} (id=${producto.idProducto})}" class="btn btn-primary" role="button"> Modificar
+        		</a>
 			</div>
 		</div>
 	</div>
