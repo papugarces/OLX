@@ -27,7 +27,7 @@ body{
     border-radius: 50%;
 }
 
-.form-group input{
+#input_login{
     height: 42px;
     font-size: 18px;
     border:0;

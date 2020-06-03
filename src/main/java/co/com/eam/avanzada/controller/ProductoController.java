@@ -93,7 +93,7 @@ public class ProductoController {
 		for (MultipartFile file : files) {
 			Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
 			fileNames.append(file.getOriginalFilename() + " ");
-			
+
 			try {
 				Files.write(fileNameAndPath, file.getBytes());
 				img.setProducto(producto);
@@ -125,14 +125,23 @@ public class ProductoController {
 		model.addAttribute("productos", iProductoRepository.cargarProductosActivos());
 		return "index";
 	}
-	
-	
-	// Listado de productos  ---------------------------------------------
+
+	// metodo ver informacion del
+	// producto---------------------------------------------
+	@GetMapping("/user/verproducto/{idProducto}")
+	public String verProducto(@PathVariable("idProducto") Integer idProducto, Model model) {
+		Producto producto = iProductoRepository.findById(idProducto)
+				.orElseThrow(() -> new IllegalArgumentException("Invalido El Producto id:" + idProducto));
+		model.addAttribute("producto", producto);
+		return "ver-publicacion";
+	}
+
+	// Listado de productos ---------------------------------------------
 	@GetMapping("/admin/listapro")
 	public String list(Producto producto, Model model) {
 		model.addAttribute("productos", iProductoRepository.findAll());
 		return "lista-productos";
-		
+
 	}
 
 }

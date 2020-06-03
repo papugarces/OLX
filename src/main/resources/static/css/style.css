@@ -63,3 +63,21 @@ footer h6{
     width: 10px;
     
 }
+
+#img_small{
+  width: 80px;;
+  height: auto;
+}
+
+#img_big{
+  width: 600px;
+  height: auto;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+#p_imagen,#precio_p,#datos_u,#descripcion_p,#s_imagen{
+  border-style: outset;
+}
+#p_des{
+  margin-top: 20px;
+}

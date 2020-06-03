@@ -1,10 +1,240 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Add User</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="static/css/style.css"
+	th:href="@{/css/style.css}">
+
 </head>
+<header>
+	<div class="container-fluid">
+		<div class="row">
+			<nav class="navbar navbar-inverse">
+				<div class="container">
+					<div class="navbar-header">
+						<!-- logo -->
+						<a class="col-md-1 navbar-brand" th:href="@{/user/productos-disponibles}"> <img alt="Brand"
+							src="/img/logo.png" class="img-rounded" id="logo_p">
+						</a>
+						<!-- seleccion departamento -->
+						<ul class="col-md-3 nav navbar-nav navbar-left" id="ul-nav">
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expanded="false">Departamento <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul></li>
+						</ul>
+
+						<form class="col-md-4 navbar-btn " id="btn-form">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Buscar...">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button">Buscar</button>
+								</span>
+							</div>
+						</form>
+						<!-- Button trigger modal -->
+						<form class="col-md-3 navbar-btn btn-group" role="group"
+							aria-label="..." id="btn-header" th:action="@{/logout}"
+							method="post">
+							<button type="submit" class="btn btn-primary">Logout</button>
+						</form>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+
+		<div class="row">
+			<!-- Selector de Idioma-->
+			<div class="col-lg-2">
+				<select class="custom-select" id="locales">
+					<option selected th:text="#{language}">Open this select
+						menu</option>
+					<option value="es" th:text="#{language.spanish}"></option>
+					<option value="en" th:text="#{language.english}"></option>
+					<option value="fr" th:text="#{language.french}"></option>
+
+				</select>
+			</div>
+			<!-- Nav con categorias-->
+			<div class="col-lg-9">
+				<ul class="nav nav-tabs" id="menu_c">
+					<li role="presentation" class="dropdown"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#"
+						role="button" aria-haspopup="true" aria-expanded="false">
+							TODAS LAS CATEGORIAS <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">lista de categorias
+						</ul></li>
+					<li role="presentation"><a href="#">Carros</a></li>
+					<li role="presentation"><a href="#">Motos</a></li>
+					<li role="presentation" class="dropdown"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#"
+						role="button" aria-haspopup="true" aria-expanded="false">
+							Apartamentos <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Venta</a></li>
+							<li><a href="#">Arrienda</a></li>
+						</ul></li>
+					<li role="presentation" class="dropdown"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#"
+						role="button" aria-haspopup="true" aria-expanded="false">
+							Casas <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Venta</a></li>
+							<li><a href="#">Arrienda</a></li>
+						</ul></li>
+					<li role="presentation"><a href="#">Teléfono - Celular</a></li>
+					<li role="presentation"><a href="#">Muebles</a></li>
+					<li role="presentation"><a href="#">Ropa</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</header>
 <body>
-<h2>Esta es la publicaci�n</h2>
-</body>
-</html>
+	<div class="container" th:object="${producto}">
+		<div class="row" id="p_des">
+			<div class="col-lg-7" id="p_imagen">
+				<div class="row">
+					<!-- aqui van aver la imagen grande del producto-->
+					<div class="col-lg-12">
+						<img src="/img/produc1.jpg" alt="..." id="img_big">
+					</div>
+				</div>
+				<div class="row" id="s_imagen">
+					<!-- aqui van aver las imagenes pequeñas del producto-->
+					<div class="col-lg-2">
+						<img src="/img/produc2.jpg" alt="..." id="img_small">
+					</div>
+					<div class="col-lg-2">
+						<img src="/img/produc2.jpg" alt="..." id="img_small">
+					</div>
+					<div class="col-lg-2">
+						<img src="/img/produc2.jpg" alt="..." id="img_small">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="row">
+					<!-- Precio Del Producto Con Categoria o sub categoria y direccion-->
+					<div class="col-lg-12" id="precio_p">
+						<h4>
+							Informacion Del Producto
+							</h5>
+							<hr>
+							<h3 th:text="'$'+${producto.precio}"></h3>
+							<h4 th:text="${producto.titulo}"></h4>
+							<hr>
+							<h6 th:text="'Direccion :'+${producto.direccion}"></h6>
+							<h6 th:text="'SubCategoria :'+${producto.subcategoria.nombre}"></h6>
+					</div>
+					<!-- Datos del Usuario-->
+					<div class="col-lg-12" id="datos_u">
+						<h4>Informacion Del Vendedor</h4>
+						<hr>
+						<h5
+							th:text="'Vendedor :'+${producto.usuario.nombre}+' '+${producto.usuario.apellido}"></h5>
+						<h5 th:text="'Numero De Contacto :'+${producto.numContacto}"></h5>
+						<h5 th:text="'E-mail :'+${producto.usuario.correo}"></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Descripcion del producto-->
+		<div class="row">
+			<div class="col-lg-7" id="descripcion_p">
+				<h4>Descripcion Del Producto</h4>
+				<h5 th:text="${producto.descripcion}"></h5>
+			</div>
+		</div>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+		crossorigin="anonymous"></script>
+
+	<footer>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-1"></div>
+				<div class="col-lg-3">
+					<ul>
+						<h6>CATEGORÍAS POPULARES</h6>
+						<li><a href="#">Carros</a></li>
+						<li><a href="#">Casas</a></li>
+						<li><a href="#">TV.Audio y Video</a></li>
+						<li><a href="#">Celulares</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2">
+					<ul>
+						<h6>LO MÁS BUSCADO</h6>
+						<li><a href="#">Motos</a></li>
+						<li><a href="#">Bicicletas</a></li>
+						<li><a href="#">Chevrolet Aveo</a></li>
+						<li><a href="#">Mazda 323</a></li>
+						<li><a href="#">Iphone</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2">
+					<ul>
+						<h6>INFORMACIÓN ÚTIL</h6>
+						<li><a href="#">Contacto & Ayuda</a></li>
+						<li><a href="#">Consejos de seguridad</a></li>
+						<li><a href="#">Terminos y Condiciones</a></li>
+						<li><a href="#">Acerca de OLX</a></li>
+						<li><a href="#">Sumate a OLX</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2">
+					<ul>
+						<h6>SERVICIOS DE OLX</h6>
+						<li><a href="#">Publica gratis tu aviso</a></li>
+						<li><a href="#">Vende más rápido</a></li>
+						<li><a href="#">OLX para Empresas</a></li>
+						<li><a href="#">Todos los avisos</a></li>
+						<li><a href="#">Sitemap</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2">
+					<ul>
+						<h6>SIGUENOS</h6>
+						<li><img src="/img/face.png" alt="...">|<img
+							src="/img/twitter.png" alt="...">|<img src="/img/youtube.png"
+							alt="..."></li>
+						<li><img src="/img/appstor.png" alt="...">|<img
+							src="/img/android.png" alt="..."></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	>
