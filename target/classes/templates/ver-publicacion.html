@@ -115,8 +115,8 @@
 			<div class="col-lg-7" id="p_imagen">
 				<div class="row">
 					<!-- aqui van a ver la imagen grande del producto-->
-					<div class="col-lg-12">
-						<img src="/img/produc1.jpg" alt="..." id="img_big">
+					<div class="col-lg-12" th:each="imagen : ${producto.imgproductos}">
+						<img th:src="${imagen.url}" alt="..." id="img_big">
 					</div>
 				</div>
 				<div class="row" id="s_imagen">

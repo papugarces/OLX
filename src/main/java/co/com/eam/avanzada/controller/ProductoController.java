@@ -192,7 +192,7 @@ public class ProductoController {
 
 		iProductoRepository.save(producto);
 		model.addAttribute("productos", iProductoRepository.findAll());
-		return "redirect:/user/productos-disponible";
+		return "redirect:/user/productos-disponibles";
 	}
 
 	// metodo Eliminar---------------------------------------------

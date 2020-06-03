@@ -6,6 +6,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 import java.util.Date;
@@ -36,7 +38,8 @@ public class Producto implements Serializable {
 	//@NotBlank(message = "El campo estado es obligatorio")
 	private boolean estado;
 
-	@NotNull(message = "{date-mandatory}")
+	@NotNull(message="{date-valid}")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date fechaPublicacion;
 
 	@NotBlank(message = "{phone-mandatory}")
