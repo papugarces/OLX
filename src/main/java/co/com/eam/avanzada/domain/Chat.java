@@ -39,6 +39,4 @@ public class Chat implements Serializable {
 	// Usuario 2 Hace Referencia al Ofertador
 	private Usuario usuario2;
 
-
-
 }
